@@ -1,15 +1,19 @@
 # Valerii Charygin — personal portfolio
 
-Independent Russian-language multipage portfolio, edition 02. Live: https://valorin777.github.io/personal-portfolio/
+Independent Russian-language multipage portfolio, edition 03.
+Live: https://valorin777.github.io/personal-portfolio/
 
-## Run and deploy
-No dependencies or build transform. Serve `dist/` using a static HTTP server. `npm run check` validates JavaScript syntax. GitHub Pages deploys `dist/` from `main` through the included Actions workflow. URLs are relative and support the `/personal-portfolio/` project path.
+## Run and publish
+No package dependencies. Serve `dist/` through a static HTTP server. `npm run generate` produces the catalog, cases, homepage, biography, and credits from the data and templates. `npm run check` validates JavaScript syntax, page structure, local resources, links, fragments, and catalog count. GitHub Actions publishes `dist/` to GitHub Pages from `main`. Relative URLs support the project subpath.
 
 ## Experience
-Suspended identity badge with mouse drag, damped return, pointer tilt and keyboard/tap flip. Accessible ambient-motion pause and reduced-motion support. Homepage with selected work; separate catalog with Beauty / Business / Experiments filters; nine detailed project pages; separate biography and credits.
+Warm paper, Prata display type, Manrope text, ink and vermilion. Original procedural Canvas sculpture morphs between a twisted ribbon, a flowing sheet, and a sphere. Mouse movement changes perspective; buttons work without hover and support keyboard activation. Ambient motion can be paused and respects reduced motion, document visibility and viewport intersection.
 
-Content is grounded in public repositories. No invented client relationships, outcomes, user counts or revenue. Collaborative and educational work is identified. Product illustrations are original HTML/CSS compositions marked as illustrations.
+The site has 17 content pages: home, catalog, biography, credits, and 13 individual project cases. A separate legacy `projects/pocket-chef.html` redirect preserves old links to the unified L’atelier / Pocket Chef case. Categories: Красота (4), Бизнес (5), Эксперименты (4). Hash filters are shareable.
 
-Fonts and existing public project previews are served locally. Manrope SIL OFL is included. Reference-video frames, third-party portraits and reference source code are not shipped. See `RESEARCH.md`, project research and `QA.md`.
+## Content
+Public repository and deployment evidence is recorded in PROJECT_RESEARCH.md. L’atelier and Pocket Chef are one user-confirmed project with different versions. Team work, independent concepts and prototypes are explicitly identified. No invented clients, revenue, audiences or results. New product covers are original graphic illustrations, labelled as illustrations.
 
-The original edition remains available in local Git branch `archive/v1-20261102` and initial commit `7f4a1d4`.
+Manrope and Prata are served locally with SIL OFL notices. The site has no trackers, external font calls, runtime dependencies or paid services. See RESEARCH.md and QA.md for design rationale and verification limits.
+
+Earlier editions remain in Git history: v1 `7f4a1d4`, v2 `4111ba9`. Local archive branches preserve both before redesign.

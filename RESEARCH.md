@@ -1,14 +1,17 @@
-# Evidence / art direction
-Reference inspected locally from `/workspace/shared/saved_video_references/portfolio_latest_865292.mp4` (57s), both 5-second overview and 0.5-second motion frames around 3–7s. Identified: dark navy ambient space, floating/swinging identity badge, rotation/flip, blue light, smooth reveals, persistent clean navigation. Own interpretation: restrained editorial typography, silver-blue monogram badge (no invented photo), film-like project covers, warm paper about section. No reference media is shipped.
+# Edition 03 — original art direction
 
-Public content verified through GitHub connector November 2, 2026:
-- Valorin777/field-form README.md and src/world.js: LAST WIND scroll film, Three.js / GSAP, original generated ronin image at art/ronin.webp.
-- Valorin777/rusjet-cinema-concept README.md and dist/index.html: independent concept, real licensed video, public taxi poster path.
-- Valorin777/sochi README.md and index.html: history route, 12 chapters, team HSE coursework; public og image path.
+The user rejected the earlier hanging identity badge as too close to the supplied video. Edition 03 replaces that composition and motion model completely. Earlier research remains available in Git history.
 
-Personal brief: Valerii Charygin, HSE business informatics, AI-assisted web/mobile work; supplied tech Next.js, TypeScript, React Native/Expo, Python/FastAPI, Firebase. Avoided explicit year of study to reduce staleness and avoided any unsupported seniority claims. No new game design used: no file supplied.
+## Direction
+Warm paper (#f1efe8), near-black ink, vermilion accents, Cyrillic Prata and Manrope. An editorial grid balances large serif typography against a small procedural sculpture studio. Selected works use asymmetrical placement and distinct art treatments; the archive and case pages retain the same typography and rhythm.
 
-## Edition 02
-The publisher independently materialized and inspected the actual 57-second reference on the Mac (Library libfile_e4dd8f06b1f08191b19b6934478518a2). Motion frames reveal a flexible strap, pendulum-like drag/release, rotation and flip; these informed the original damped CSS/SVG badge. No source code or frames were copied.
+The sculpture is generated locally from a shared parametric grid. Three user-selected surfaces—a full-twist ribbon, a flowing sheet and a sphere—morph with depth-sorted paper surfaces and fine contours. This is not a hanging badge, a copied video frame or a borrowed model. Motion elsewhere consists of text reveals, restrained card reactions, filter entrances, native document transitions where supported and scroll progress. Touch scrolling remains native; no scroll hijacking.
 
-New scope: real multipage site, project category buttons (Красота / Бизнес / Эксперименты), nine full project cases. Additional source verification is recorded in PROJECT_RESEARCH.md. Manrope is self-hosted under its included SIL OFL; project previews were copied from the user's already-public sites for reliable loading. Product covers are original HTML/CSS illustrations and labelled accordingly.
+## Web research actually viewed
+- https://studiofreight.com/ — opened and visually inspected in the supported browser: dense project imagery, generous empty space and understated navigation. Useful as a benchmark for editorial hierarchy; its grid and content were not copied.
+- https://www.awwwards.com/websites/portfolio/ — opened and visually inspected the portfolio selection, including displayed previews. Used to compare variety and individuality, not as a template.
+
+## Content and assets
+Verified project scope and grouping are recorded in PROJECT_RESEARCH.md. The user explicitly identified L’atelier / Pocket Chef as one project. Existing public LAST WIND, RusJet and Хроносфера visuals remain project-specific. Other covers are authored HTML/CSS illustrations and are labelled accordingly. No personal portraits, video-reference frames, stock garment images or private application materials are shipped.
+
+The owner's stated biography is kept conservative: Valerii Charygin, HSE business informatics, web/mobile projects with AI-assisted development. No seniority, client relationship or outcome is inferred from a technology list.
