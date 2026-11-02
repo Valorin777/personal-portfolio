@@ -1,4 +1,12 @@
-# Edition 03 — original art direction
+# Edition 04 — dark direction and scroll motion
+
+The owner requested a layered dark theme, removal of every emoji and arrow glyph, and smooth scroll-linked animation. This edition retains the original procedural sculpture and verified project structure while replacing paper surfaces with graphite, mineral green/blue panels, soft lighting and copper accents. It is a dark theme, not a flat pure-black treatment.
+
+Native scrolling remains under browser control. A small dependency-free controller eases visual progress, batches layout reads and writes, caches element geometry, reduces movement on phones and stops animation work when settled or hidden. Project surfaces and typography move independently; reduced motion returns static readable layouts. A decorative sculpture halo is clipped to its stage so rotation cannot create horizontal overflow.
+
+Arrow containers and glyphs were removed from all navigation, cards, calls to action and footers. Links use text labels. The About page now ties education, work areas, stack, process and authorship to available evidence. Faith over Fear is explicitly commissioned work. Public Telegram and telephone links were supplied directly by the owner for publication.
+
+## Earlier edition 03 — original art direction
 
 The user rejected the earlier hanging identity badge as too close to the supplied video. Edition 03 replaces that composition and motion model completely. Earlier research remains available in Git history.
 

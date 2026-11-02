@@ -30,6 +30,7 @@
         button.classList.toggle('is-active', active);
       });
       if (status) status.textContent = `Показано проектов: ${count}`;
+      document.dispatchEvent(new CustomEvent('portfolio:layout-change'));
       if (updateURL) {
         const url = new URL(window.location.href);
         url.hash = selected === 'all' ? '' : selected;

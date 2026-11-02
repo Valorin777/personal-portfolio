@@ -5,7 +5,8 @@ const walk=d=>readdirSync(d).flatMap(n=>{const p=resolve(d,n);return statSync(p)
 const files=walk(root).filter(p=>p.endsWith('.html'));
 const errors=[];
 for(const file of files){
- const html=readFileSync(file,'utf8'); const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+ const html=readFileSync(file,'utf8');
+ if(/[\p{Emoji_Presentation}\uFE0F\u2190-\u21ff\u27f0-\u27ff\u2900-\u297f\u{1f800}-\u{1f8ff}]/u.test(html))errors.push(`${relative(root,file)}: emoji or arrow glyph found`); const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  if(new Set(ids).size!==ids.length)errors.push(`${relative(root,file)}: duplicate IDs`);
  if((html.match(/<h1\b/g)||[]).length!==1)errors.push(`${relative(root,file)}: must have one h1`);
  for(const m of html.matchAll(/\b(?:src|href)="([^"]+)"/g)){
@@ -16,7 +17,7 @@ for(const file of files){
  }
 }
 const data=JSON.parse(readFileSync('project-data.json','utf8'));const catalog=readFileSync(resolve(root,'work.html'),'utf8');
-const cards=[...catalog.matchAll(/class="catalog-card(?: reveal)?" data-category="([^"]+)"/g)];
+const cards=[...catalog.matchAll(/<article\b[^>]*class="catalog-card(?: reveal)?"[^>]*data-category="([^"]+)"/g)];
 if(cards.length!==data.length)errors.push(`Expected ${data.length} project cards; found ${cards.length}`);
 if(files.length!==data.length+5)errors.push(`Expected ${data.length+5} HTML pages; found ${files.length}`);
 for(const project of data)if(!existsSync(resolve(root,`projects/${project.slug}.html`)))errors.push(`Missing case ${project.slug}`);

@@ -12,7 +12,7 @@ Five missing public entries were researched: Faith over Fear, L’atelier, Гл�
 
 | Case / slug | Primary evidence | Editorial constraints |
 |---|---|---|
-| Faith over Fear / `faithoverfear` | [package](https://github.com/Valorin777/faithoverfear/blob/main/package.json), [source](https://github.com/Valorin777/faithoverfear/tree/main/src), [deployment](https://faithoverfear-one.vercel.app/) | Next.js/React/TypeScript, Payload CMS, Tailwind. Catalog, product, cart, checkout, account and CMS implementation exist. Product fixtures use placeholder imagery. Do not infer successful payments, sales, clients, live stock or commercial traction. |
+| Faith over Fear / `faithoverfear` | [package](https://github.com/Valorin777/faithoverfear/blob/main/package.json), [source](https://github.com/Valorin777/faithoverfear/tree/main/src), [deployment](https://faithoverfear-one.vercel.app/) | Commissioned client project, explicitly confirmed by the user in this session: «Упомяни что faithof это проект на заказ был». Next.js/React/TypeScript, Payload CMS, Tailwind. Catalog, product, cart, checkout, account and CMS implementation exist. Product fixtures use placeholder imagery. Do not infer client identity, successful payments, sales, budget, live stock or commercial traction. |
 | Окошко / `okoshko` | [README](https://github.com/Valorin777/okoshko), [bot README](https://github.com/Valorin777/okoshko/blob/main/bot/README.md) | Expo/React Native/TypeScript and Telegram Mini App; primary backend is FastAPI. Cloudflare Workers/D1 is the original implementation. No app-store publication claim. |
 | L’atelier / Pocket Chef / `latelier` | [L’atelier README](https://github.com/Valorin777/latelier/blob/main/README.md), [Pocket Chef README](https://github.com/Valorin777/pocket-chef/blob/main/README.md), [older repository](https://github.com/Valorin777/latelier-ai-platform) | User-confirmed single project with version history. L’atelier: home-ingredient cooking PWA/TMA, JavaScript/Firebase, FastAPI/aiogram, OpenRouter. Pocket Chef: later offline recipe-composition engine with Capacitor iOS/Android projects. No essay-generator, app-store publication or proven nutrition-precision claim. |
 | LAST WIND / `last-wind` | [README](https://github.com/Valorin777/field-form) | Current project at historical `field-form` address; four compositions, image-based character with localized cloth deformation, not skeletal 3D. |
@@ -49,8 +49,12 @@ LAST WIND, RusJet and Sochi retain existing local project assets. New applicatio
 
 Faith over Fear has a verified [512px brand icon](https://raw.githubusercontent.com/Valorin777/faithoverfear/main/public/icons/icon-512.png), but no verified public garment images in the inspected product data. L’atelier’s public assets include [featured dish artwork](https://raw.githubusercontent.com/Valorin777/latelier/main/images/dish_steak.webp) and [brand icon](https://raw.githubusercontent.com/Valorin777/latelier/main/icon-512.png); original image provenance was not independently established, so this task did not import them.
 
-No clients, sales, revenue, audience metrics, testimonials or measured outcomes were invented. The new data contains no decorative emoji. Private repository source and personal memories were not used as portfolio content.
+Faith over Fear’s commissioned-client status comes from the user’s explicit statement. No client identity, budget, sales, revenue, audience metrics, testimonials or measured outcomes were invented. The new data contains no decorative emoji. Private repository source and personal memories were not used as portfolio content.
 
 ## Validation
 
 Data validation checks unique slugs, required scalar/array fields, four feature objects per added case, known categories, public-only source/demo URLs and absence of private repository links. Case generation and visual QA must be run after the final catalog is integrated; earlier checks for nine pages and category counts 3/4/2 are superseded by this inventory.
+
+## Professional biography update
+
+The user explicitly requested that Faith over Fear be described as commissioned work. This direct user statement establishes the client-project relationship without requiring a public client name or contract. The portfolio copy now marks it as a client store project. Professional background and stack evidence are mapped in `BIO_EVIDENCE.md`; missing first-year and Moscow details are not inferred from repository activity.

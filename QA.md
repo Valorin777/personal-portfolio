@@ -1,20 +1,21 @@
-# Edition 03 — QA, 2026-11-02
+# Edition 04 — QA, 2026-11-02
 
-## Verified
-- `npm run generate` and `npm run check`: JS syntax, local assets/links/fragments, unique IDs, one h1, 13 catalog cards. 17 content pages plus one compatibility redirect.
-- Supported in-app browser at desktop, 820px tablet, 390px and 320px phone viewports. All 13 case pages and home/about/credits have document width equal to scroll width at 320px (305px content plus browser scrollbar); no horizontal overflow.
-- Homepage original sculpture renders, switches between shapes and updates pressed states/captions. Ambient pause updates the control and stops ambient movement. Mouse interaction and normal scrolling remain available.
-- Catalog counts are data-driven: all 13, beauty 4, business 5, experiments 4. Filtering updates aria-pressed, visible cards and URL hash. Cases navigate to separate documents.
-- Old Pocket Chef case URL redirects to the unified L’atelier / Pocket Chef case. Full-name headings wrap correctly on the narrow phone.
-- Homepage, catalog and representative case visuals inspected. All checked project images load. No site JavaScript errors during browser checks.
-- Small accent text darkened to #bd3c24 on paper; selected dark controls retain light text on hover. Contact remains accessible in mobile navigation.
-- No decorative emoji, private repo links, old badge code or copied reference assets in published pages.
-- Self-hosted Manrope and Prata with SIL OFL; total static payload approximately 1.1 MB, no package dependencies.
+## Verified in this revision
+- `npm run generate` and `npm run check` pass. Four JavaScript files checked; 17 content pages plus one compatibility redirect validated for local resources, links, fragments, headings, unique IDs and 13 catalog cases.
+- A publishing check rejects decorative emoji and arrow glyphs in generated HTML. All card, button, navigation and footer arrows are removed; text labels remain.
+- Dark theme inspected in the supported in-app browser at desktop1280, tablet820, phone390 and narrow phone320. Main content uses graphite surfaces, soft highlights, muted mineral covers and copper accents; no paper/light UI blocks remain.
+- All 13 case pages checked at320: clientWidth and scrollWidth both305px (15px browser scrollbar). Home/contact, catalog and expanded biography also have no horizontal overflow; tablet index/catalog/about widths805px match their scroll widths.
+- Actual native scrolling exercised on desktop and phone-sized views. Hero progress changed from0 to0.3719 in desktop check; separate project progress/scale values updated in staggered order. Phone card shift was−10.04px within its reduced18px amplitude. No scroll interception.
+- Found and fixed two motion issues: a decorative glow enlarged the overflow area, now clipped to its sculpture stage; reveal specificity previously suppressed three scroll transforms, now corrected with reduced-motion resets retained.
+- Catalog filters after scroll integration: business5, beauty4, experiments4, all13. URL and pressed states update; hidden cards do not create overflow.
+- Contact buttons on320 are269px wide and54px tall. Telegram href is the owner-supplied public profile; it was opened and matched @valorinin. Telephone href is `tel:+79856147867`, displayed with Russian formatting. No message or phone call was sent.
+- Expanded About page has education, work areas, stack linked to examples, AI-assisted process, project roles and contact buttons. Faith over Fear is explicitly commissioned work; collaboration/team cases remain labelled.
+- Independent review checked CSS nesting, motion logic and key text/button contrast pairs (sampled ratios at least6.2:1). No new JavaScript errors observed during browser QA.
 
-## Source review and limits
-- Independent review of app.js and sculpture.js found no blocking runtime defect. Reduced-motion preference disables animations and pointer tilt; shape changes become immediate. Offscreen/hidden pages cancel the animation loop. DPR is capped and mobile geometry is reduced.
-- Responsive browser testing is not a physical iPhone test. Actual touch hardware, OS reduced-motion toggling and measured low-end-device frame rates were not tested. Native touch handling was source-reviewed; buttons were exercised in phone-sized browser views.
-- Product illustrations are labelled; individual project backends, payments and external games are outside this site's QA. HTTP availability does not imply all external product functions work.
-- Zakup and Deal Guard remain outside the catalog because accessible evidence for their implementation/status was not found. Personal Context retrieval was unavailable. No capabilities or results invented for them.
+## Source review and practical limits
+- Reduced-motion preference sets static progress, removes animated transforms and disables ambient canvas movement. Offscreen/hidden sculpture and settled scroll controller suspend RAF. Mobile geometry and DPR are capped. These preference paths were source-reviewed; OS preference emulation was not available.
+- Viewport testing is not a physical iPhone or Android hardware test. Actual touch hardware and low-end-device frame rates were not measured. Native touch handling is retained; functional controls work without hover.
+- External project backends, payments and games are not validated by this portfolio QA. Project covers are labelled illustrations. Zakup and Deal Guard still lack accessible implementation/status evidence and are not added as completed work.
+- No other project repository was modified. Public contact publication was explicitly requested by the owner.
 
-Final deployment receipt and public-byte verification are stored outside the published repository in the task workspace.
+The final CI run and byte-for-byte public deployment receipt are recorded outside the repository in the task workspace.

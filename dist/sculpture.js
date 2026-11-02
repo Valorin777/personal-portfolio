@@ -29,7 +29,7 @@
   let inView = true, frame = 0, previousTime = 0;
   let phase = 0, yaw = 0, pitch = 0, targetYaw = 0, targetPitch = 0;
   let drag = null;
-  let ink = '#191a18', accent = '#e04a2d', paper = '#f1efe8';
+  let ink = '#c4d5d1', accent = '#d8a17c', paper = '#111619';
 
   function point(shape, u, v) {
     if (shape === 'flow') {
@@ -212,9 +212,9 @@
     const nextU = width < 440 ? 112 : 144;
     const nextV = width < 440 ? 28 : 40;
     const style = getComputedStyle(stage);
-    ink = style.getPropertyValue('--sculpture-ink').trim() || '#191a18';
-    accent = style.getPropertyValue('--sculpture-accent').trim() || '#e04a2d';
-    paper = style.getPropertyValue('--sculpture-paper').trim() || '#f1efe8';
+    ink = style.getPropertyValue('--sculpture-ink').trim() || '#c4d5d1';
+    accent = style.getPropertyValue('--sculpture-accent').trim() || '#d8a17c';
+    paper = style.getPropertyValue('--sculpture-paper').trim() || '#111619';
     if (!current || uCount !== nextU || vCount !== nextV) {
       uCount = nextU;
       vCount = nextV;
