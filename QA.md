@@ -1,35 +1,19 @@
-# QA — 2026-11-02
+# Edition 02 — QA, 2026-11-02
 
-## Passed on publisher Mac
-- Source ZIP byte size 15,640 and SHA-256 `f7cc744dea76db4cda5c97dda5c6cf7a135bc18d2c285ff65f632619de19c4b7` verified before safe extraction.
-- `npm run build` passed under Node 22.14.0; no dependency installation required.
-- Supported in-app browser: desktop hero visually inspected; badge mouse click sets aria-pressed true, Enter sets it false, animation pause updates accessible name.
-- Responsive browser viewport checks at 390×844 and 320×780: document widths 375px and 305px (scrollbar excluded), scrollWidth equal to clientWidth.
-- All three project preview images loaded with positive naturalWidth.
-- GitHub Pages configured with GitHub Actions source in new public repository `Valorin777/personal-portfolio`.
-- Real iPhone/Safari testing remains unperformed; responsive browser checks are not real-device verification.
+## Passed
+- `npm run check`: JavaScript syntax plus 13 HTML pages checked for local resource paths, links, fragments, unique IDs and a single h1. Nine catalog cards.
+- Consumer-local reference video materialized from Library. Actual 57-second video inspected through 5-second overview and 0.5-second motion frames, before redesign.
+- Supported in-app browser, desktop: homepage, front/back identity card, catalog, project case; no new site JavaScript errors after final app integration.
+- Pointer drag moved badge +81/-45px; release returned it to 0/0 with damped spring. Drag did not flip the card. Click and Enter flip; ambient pause state toggles correctly.
+- Catalog filters: all 9, beauty 3, business 4, experiments 2. Matching hash and aria-pressed state update; hidden projects removed from view. Case navigation opens separate HTML documents.
+- All 13 pages checked at viewport 320×780: document clientWidth and scrollWidth both 305px (15px browser scrollbar). Long biography headline fixed after observed overflow.
+- Representative 390px mobile and 820px tablet views inspected. Typography, card controls and case pages remain readable.
+- Project media and font files are local. Manrope SIL OFL included. Original reference media is not distributed.
+- First edition preserved in commit 7f4a1d4 and local archive/v1-20261102 branch.
 
-## Passed in cloud workspace
-- `npm run build` (JavaScript syntax check; no dependencies/build transform).
-- HTML local resources and fragment IDs resolved by parser check.
-- Actual browser inspection through supported managed preview and CUA: desktop hero, projects, biography. Replaced missing arrow glyphs with original CSS icons after visual inspection.
-- 390px and 320px iframe viewport visual inspection. Measured content widths 375 and 305px respectively (15px desktop scrollbar); scrollWidth equals clientWidth, no horizontal overflow. Tightened 320px nav to prevent label wrapping.
-- Identity badge click flip sets aria-pressed true; Enter flips back. Global animation pause sets aria-pressed true and updates accessible name.
-- Project images all returned complete=true and naturalWidth>0 in browser.
-- Desktop body scrollWidth equals clientWidth (1165px).
-- Main project and biography anchor navigation visually verified.
-- Console sample: only pre-existing browser-extension metadata errors, not site-origin errors.
-- All external links HTTPS and all new-window links noopener/noreferrer.
-- No forms, authentication, analytics, cookies, API keys, private contacts, or copied reference media.
+## Scope limits
+- Responsive browser testing, not a physical iPhone/Safari device test.
+- Reduced-motion behavior source-reviewed; OS preference emulation not performed in this browser tool.
+- Product-cover interfaces are marked illustrations. Project features and statuses were checked against public repositories; no metrics or client relationships invented.
 
-## Implemented and source-reviewed, not fully emulated here
-- prefers-reduced-motion live change handling; no-JS content stays visible; canvas stops offscreen/on document hidden; DPR capped at 1.5.
-- Touch interaction uses native button tap rather than pointer tilt.
-- Safari / real iPhone and exact final Pages deployment still require publisher verification. Cloud browser API has no supported viewport/reduced-motion emulation, so responsive iframe tests do not constitute real-device testing.
-
-## Publication handoff
-- Copy all archive contents into new repo (no enclosing directory), preserving .github/workflows/pages.yml.
-- npm run check; enable Pages source GitHub Actions; commit/push main; monitor workflow exact commit.
-- Verify published homepage, credits.html, CSS/JS, three image loads, badge flip, pause, mobile widths, and anchors at /personal-portfolio/.
-- Preview images are intentionally hosted at user's existing public project URLs; text and links remain usable when unavailable. Do not replace them with fabricated client content.
-- No screenshot artifacts are included; visual QA screenshots were internal browser inspection only.
+Deployment verification for the final commit is recorded outside the repository in the task's live-verification.json.

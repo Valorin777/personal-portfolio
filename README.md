@@ -1,14 +1,15 @@
 # Valerii Charygin — personal portfolio
 
-Independent Russian-language portfolio, not an Okoshko product or booking page.
+Independent Russian-language multipage portfolio, edition 02. Live: https://valorin777.github.io/personal-portfolio/
 
-## Run
-No dependencies or build required. Serve `dist/` with any static server. `npm run check` validates JavaScript syntax. GitHub Pages workflow publishes `dist/` from `main`; enable Pages with source GitHub Actions.
+## Run and deploy
+No dependencies or build transform. Serve `dist/` using a static HTTP server. `npm run check` validates JavaScript syntax. GitHub Pages deploys `dist/` from `main` through the included Actions workflow. URLs are relative and support the `/personal-portfolio/` project path.
 
 ## Experience
-Original spring-eased 3D CSS identity badge (pointer tilt, click/keyboard flip), canvas particles, scrolling reveals, cinematic project compositions. Mobile layout, reduced-motion mode, global animation pause, keyboard-visible focus, no-JS content visibility. Canvas stops offscreen and while page is hidden.
+Suspended identity badge with mouse drag, damped return, pointer tilt and keyboard/tap flip. Accessible ambient-motion pause and reduced-motion support. Homepage with selected work; separate catalog with Beauty / Business / Experiments filters; nine detailed project pages; separate biography and credits.
 
-All text is grounded in the supplied personal brief and public project READMEs. No invented metrics, clients, testimonials or role seniority. Sochi is explicitly a team educational project; RusJet is explicitly an independent concept. No private contact details. Contact points to the user's public GitHub profile; no unverified personal email/Telegram.
+Content is grounded in public repositories. No invented client relationships, outcomes, user counts or revenue. Collaborative and educational work is identified. Product illustrations are original HTML/CSS compositions marked as illustrations.
 
-## Assets / rights
-All portfolio source and identity artwork are original. No reference-video frames, third-party person's portrait, or third-party source are copied. Project images are linked directly from the user's public project sites; credits and source-license links are in `dist/credits.html`. No third-party libraries or bundled fonts. See `RESEARCH.md` and `QA.md`.
+Fonts and existing public project previews are served locally. Manrope SIL OFL is included. Reference-video frames, third-party portraits and reference source code are not shipped. See `RESEARCH.md`, project research and `QA.md`.
+
+The original edition remains available in local Git branch `archive/v1-20261102` and initial commit `7f4a1d4`.
