@@ -1,23 +1,30 @@
 # Valerii Charygin — personal portfolio
 
-Independent Russian-language multipage portfolio, edition 04.
+Russian-language multipage personal portfolio, edition 05.
 Live: https://valorin777.github.io/personal-portfolio/
 
 ## Run and publish
-No package dependencies. Serve `dist/` through a static HTTP server. `npm run generate` produces the catalog, cases, homepage, biography, and credits from the data and templates. `npm run check` validates JavaScript syntax, page structure, local resources, links, fragments, and catalog count. GitHub Actions publishes `dist/` to GitHub Pages from `main`. Relative URLs support the project subpath.
+
+No package dependencies. Serve `dist/` through a static HTTP server. `npm run generate` produces the catalog, cases, homepage, biography and credits from data and templates. `npm run check` validates JavaScript, page structure, local resources (including video posters), links, fragments, catalog count and approved contact links. GitHub Actions publishes `dist/` to GitHub Pages from `main`. Relative URLs support the project subpath.
 
 ## Experience
-Layered graphite, mineral surfaces, copper highlights, Prata display type and Manrope text. Original procedural Canvas sculpture morphs between a twisted ribbon, a flowing sheet, and a sphere. Mouse movement changes perspective; buttons work without hover and support keyboard activation. Ambient motion can be paused and respects reduced motion, document visibility and viewport intersection.
 
-The site has 17 content pages: home, catalog, biography, credits, and 13 individual project cases. A separate legacy `projects/pocket-chef.html` redirect preserves old links to the unified L’atelier / Pocket Chef case. Categories: Красота (4), Бизнес (5), Эксперименты (4). Hash filters are shareable. The expanded biography covers education, work areas, stack with project examples, AI-assisted process and authorship. Faith over Fear is owner-confirmed commissioned work.
+Personal identity leads the design: large Manrope typography, real project media, layered graphite surfaces, violet and coral accents. No green UI palette, studio framing, abstract sculpture, arrow glyphs or emoji.
 
-A lightweight scroll controller eases presentation over native scrolling: hero typography and sculpture, project surfaces, section headings and contact typography. Reduced motion produces static values; hidden or settled controllers stop requesting frames. No arrow glyphs or decorative emoji are used.
+The homepage contains a native-scroll sequence of three full-screen projects. Panels enter from below, enlarge and cover the preceding scene while it recedes and darkens. The local RusJet video plays only when its active scene is visible. It pauses when covered, offscreen, hidden or motion is disabled. The controller does not intercept wheel or touch scrolling.
 
-Public contact buttons use the Telegram handle and phone number supplied by the owner in `contact-data.json`. Telegram opens the supplied profile; the telephone anchor uses `tel:`.
+The pause control and system reduced-motion preference use a static, accessible sequence. Short landscape viewports also use ordinary document flow. Navigation and case links remain available without JavaScript. See QA.md for actual browser checks and their limits.
 
-## Content
-Public repository and deployment evidence is recorded in PROJECT_RESEARCH.md. L’atelier and Pocket Chef are one user-confirmed project with different versions. Team work, independent concepts and prototypes are explicitly identified. No invented clients, revenue, audiences or results. New product covers are original graphic illustrations, labelled as illustrations.
+The site has 17 content pages: home, catalog, biography, credits and 13 individual project cases. A legacy `projects/pocket-chef.html` redirect preserves old links to the unified L’atelier / Pocket Chef case. Categories: Красота (4), Бизнес (5), Эксперименты (4). Hash filters are shareable.
 
-Manrope and Prata are served locally with SIL OFL notices. The site has no trackers, external font calls, runtime dependencies or paid services. See RESEARCH.md and QA.md for design rationale and verification limits.
+## Content and contacts
 
-Earlier editions remain in Git history: v1 `7f4a1d4`, v2 `4111ba9`, v3 `5e5994b`. Local archive branches preserve earlier editions.
+The biography covers education, work areas, technologies with project examples, AI-assisted process and authorship. Faith over Fear is owner-confirmed commissioned work. Team work, independent concepts and prototypes are identified explicitly. No invented clients, revenue, audiences or results.
+
+Public repository and deployment evidence is recorded in PROJECT_RESEARCH.md and BIO_EVIDENCE.md. L’atelier and Pocket Chef are one user-confirmed project with different versions. ASSET_SOURCES_V5.md identifies actual screenshots, official graphics, generated artwork and licensed footage. Remaining graphic covers are labelled as illustrations.
+
+Contact buttons use only the Telegram profile and phone number supplied by the owner in `contact-data.json`. The phone link uses `tel:`. No contact message or call is initiated automatically.
+
+Manrope is served locally with its SIL OFL notice. There are no trackers, external font calls, runtime dependencies or paid services. RESEARCH.md describes earlier research; edition 05 supersedes the previous sculpture design.
+
+Earlier editions remain in Git history: v1 `7f4a1d4`, v2 `4111ba9`, v3 `5e5994b`, v4 `2c5be8e`. Archive branches preserve previous editions.
