@@ -1,0 +1,1 @@
+{"name":"valorin-personal-portfolio","version":"1.0.0","private":true,"description":"Valerii Charygin — independent personal portfolio","scripts":{"check":"node --check dist/app.js","build":"npm run check"}}
