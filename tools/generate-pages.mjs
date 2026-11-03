@@ -65,7 +65,7 @@ const filterButtons = [['all', 'Все работы'], ...Object.entries(categor
 const catalog = `${head('Проекты', `${projects.length} ${projectNoun(projects.length)} Валерия Чарыгина: визуальные сайты, сервисы, мобильные приложения и эксперименты.`)}
 <body class="catalog-page" id="top">${header()}
 <main class="page-main" id="main-content">
-<section class="catalog-hero section" aria-labelledby="catalog-title"><p class="eyebrow">КАТАЛОГ / ${countLabel.toLocaleUpperCase('ru')}</p><h1 id="catalog-title">Мои проекты.</h1><div class="catalog-intro"><p>Заказные сайты, собственные продукты<br>и командные работы.</p><p>В каждом кейсе — задача, устройство проекта,<br>формат работы и текущий статус.</p></div></section>
+<section class="catalog-hero section" aria-labelledby="catalog-title"><p class="eyebrow">КАТАЛОГ / ${countLabel.toLocaleUpperCase('ru')}</p><h1 id="catalog-title">Мои проекты.</h1><div class="catalog-intro"><p>Собственные продукты, учебные проекты<br>и командные работы.</p><p>В каждом кейсе — задача, устройство проекта,<br>формат работы и текущий статус.</p></div></section>
 <section class="catalog-section section" aria-label="Каталог проектов"><div class="filter-bar" role="group" aria-label="Фильтр по направлению">${filterButtons}</div><p id="filter-status" class="filter-status" aria-live="polite" aria-atomic="true"></p><div class="catalog-grid">${projects.map(card).join('\n')}</div><p class="visual-note catalog-note">В каталоге используются снимки опубликованных страниц, официальная графика проектов и кадры видео. Типографические обложки остальных работ — иллюстрации идеи.</p></section>
 <section class="catalog-outro section reveal"><p class="eyebrow">ОБ АВТОРЕ</p><h2>Образование, стек<br>и работа над проектами.</h2><div class="contact-actions"><a class="text-link" href="about.html">Подробнее обо мне</a><a class="button button-secondary" href="${esc(contact.telegramUrl)}" ${external}>Написать в Telegram</a></div></section>
 </main>${footer()}</body></html>\n`;
@@ -92,3 +92,4 @@ for (const [i, project] of projects.entries()) {
   writeFileSync(resolve(root, 'dist/projects', `${project.slug}.html`), page);
 }
 console.log(`Generated catalog and ${projects.length} case pages.`);
+
