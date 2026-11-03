@@ -2,9 +2,9 @@
   "name": "valorin-personal-portfolio",
   "version": "5.0.0",
   "private": true,
-  "description": "Valerii Charygin \u2014 independent personal portfolio",
+  "description": "Valerii Charygin — independent personal portfolio",
   "scripts": {
-    "check": "node --check dist/app.js && node --check dist/showcase.js && node tools/check-site.mjs",
+    "check": "node --check dist/app.js && node --check dist/showcase.js && node tools/check-site.mjs && node tools/check-copy.mjs",
     "build": "npm run check",
     "generate": "node tools/generate-pages.mjs && node tools/generate-shell.mjs"
   }

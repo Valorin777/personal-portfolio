@@ -44,6 +44,6 @@ Use “инструменты в моих проектах” or show technologi
 
 This text deliberately leaves location, year of study, employer and experience duration unspecified because those details are not confirmed. AI-assisted creation can be described honestly: ORBIT’s public page credits Codex, and the public Главный герой README acknowledges the preserved Claude design. Do not present every project as wholly manual or entirely solo work.
 
-## Owner-approved public contact links
+## Public contact links
 
-The owner directly supplied Telegram handle `@valorinin` and a Russian mobile number for publication in this portfolio. The exact link values live in `contact-data.json`; no contact details were inferred from private files. The public Telegram profile at https://t.me/valorinin was opened and showed the supplied handle plus HSE / GSB / BI in its bio. No message or phone call was sent.
+Telegram @valorinin remains the public contact. On 2026-11-03 the owner requested removal of the phone number from the portfolio, including visible content, links and metadata. The current contact-data.json therefore contains only Telegram values. Do not restore a phone field from earlier revisions.

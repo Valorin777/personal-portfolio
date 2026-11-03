@@ -6,17 +6,15 @@ const files=walk(root).filter(p=>p.endsWith('.html'));
 const errors=[];
 const contact=JSON.parse(readFileSync('contact-data.json','utf8'));
 if(contact.telegramUrl!==`https://t.me/${contact.telegramUsername}`)errors.push('Contact source: Telegram URL and username differ');
-if(!/^tel:\+\d{8,15}$/.test(contact.phoneHref||''))errors.push('Contact source: expected an international tel: URL');
-if(String(contact.phoneDisplay).replace(/\D/g,'')!==String(contact.phoneHref).replace(/\D/g,''))errors.push('Contact source: displayed phone number differs from tel: URL');
+if(Object.keys(contact).some(key=>/phone|telephone/i.test(key)))errors.push('Contact source: phone fields must not be published');
 for(const file of files){
  const html=readFileSync(file,'utf8');
  const page=relative(root,file);
  const hrefs=[...html.matchAll(/\bhref="([^"]+)"/g)].map(match=>match[1]);
  const redirect=/<meta\b[^>]*http-equiv="refresh"/i.test(html);
  if(!redirect&&!hrefs.includes(contact.telegramUrl))errors.push(`${page}: missing Telegram contact from contact-data.json`);
- if(['index.html','about.html'].includes(page)&&!hrefs.includes(contact.phoneHref))errors.push(`${page}: missing phone contact from contact-data.json`);
  if(hrefs.some(href=>/^https:\/\/(?:www\.)?t\.me\//i.test(href)&&href!==contact.telegramUrl))errors.push(`${page}: Telegram link differs from contact-data.json`);
- if(hrefs.some(href=>/^tel:/i.test(href)&&href!==contact.phoneHref))errors.push(`${page}: phone link differs from contact-data.json`);
+ if(/tel:|(?:\+7|8)[\s().-]*\d{3}[\s().-]*\d{3}[\s().-]*\d{2}[\s().-]*\d{2}/i.test(html))errors.push(`${page}: phone number or tel link must not be published`);
  if(/\bsrc="(?:[^"?#]*\/)?(?:sculpture|scroll-motion)\.js(?:[?#][^"]*)?"/i.test(html))errors.push(`${page}: obsolete pre-v5 motion script reference`);
  if(/[\p{Emoji_Presentation}\uFE0F\u2190-\u21ff\u27f0-\u27ff\u2900-\u297f\u{1f800}-\u{1f8ff}]/u.test(html))errors.push(`${relative(root,file)}: emoji or arrow glyph found`); const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  if(new Set(ids).size!==ids.length)errors.push(`${relative(root,file)}: duplicate IDs`);
@@ -35,3 +33,4 @@ if(files.length!==data.length+5)errors.push(`Expected ${data.length+5} HTML page
 for(const project of data)if(!existsSync(resolve(root,`projects/${project.slug}.html`)))errors.push(`Missing case ${project.slug}`);
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log(`Checked ${files.length} pages: local links, assets, fragments, headings, IDs, source contact links and motion scripts; ${data.length} catalog entries.`);
+
