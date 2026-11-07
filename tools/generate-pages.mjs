@@ -56,8 +56,8 @@ function visual(project, prefix = '', cover = false) {
 
 function card(project, i) {
   return `<article class="catalog-card reveal" data-category="${project.category}">
-<a class="catalog-card-link" href="projects/${project.slug}.html" aria-label="${esc(project.name)} — о проекте">${visual(project)}</a>
-<div class="catalog-card-copy"><div class="catalog-meta"><span>${num(i + 1)} / ${categories[project.category]}</span><span>${esc(project.type)}</span></div><h2><a href="projects/${project.slug}.html">${esc(project.name)}</a></h2><p>${esc(project.summary)}</p><div class="case-stack">${project.stack.slice(0, 3).map(item => `<span>${esc(item)}</span>`).join('')}</div></div>
+<a class="catalog-card-link" href="${esc(project.cardHref || `projects/${project.slug}.html`)}" aria-label="${esc(project.name)} — ${project.cardHref ? 'HTML-просмотр' : 'о проекте'}">${visual(project)}</a>
+<div class="catalog-card-copy"><div class="catalog-meta"><span>${num(i + 1)} / ${categories[project.category]}</span><span>${esc(project.type)}</span></div><h2><a href="${esc(project.cardHref || `projects/${project.slug}.html`)}">${esc(project.name)}</a></h2><p>${esc(project.summary)}</p><div class="case-stack">${project.stack.slice(0, 3).map(item => `<span>${esc(item)}</span>`).join('')}</div></div>
 </article>`;
 }
 

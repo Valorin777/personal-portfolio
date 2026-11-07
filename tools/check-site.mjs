@@ -29,7 +29,8 @@ for(const file of files){
 const data=JSON.parse(readFileSync('project-data.json','utf8'));const catalog=readFileSync(resolve(root,'work.html'),'utf8');
 const cards=[...catalog.matchAll(/<article\b[^>]*class="catalog-card(?: reveal)?"[^>]*data-category="([^"]+)"/g)];
 if(cards.length!==data.length)errors.push(`Expected ${data.length} project cards; found ${cards.length}`);
-if(files.length!==data.length+5)errors.push(`Expected ${data.length+5} HTML pages; found ${files.length}`);
+const previewCount=files.filter(file=>relative(root,file).startsWith('previews/')).length;
+if(files.length!==data.length+5+previewCount)errors.push(`Expected ${data.length+5+previewCount} HTML pages; found ${files.length}`);
 for(const project of data)if(!existsSync(resolve(root,`projects/${project.slug}.html`)))errors.push(`Missing case ${project.slug}`);
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
 console.log(`Checked ${files.length} pages: local links, assets, fragments, headings, IDs, source contact links and motion scripts; ${data.length} catalog entries.`);

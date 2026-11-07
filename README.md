@@ -28,3 +28,9 @@ Contact buttons use only the Telegram profile and phone number supplied by the o
 Manrope is served locally with its SIL OFL notice. There are no trackers, external font calls, runtime dependencies or paid services. RESEARCH.md describes earlier research; edition 05 supersedes the previous sculpture design.
 
 Earlier editions remain in Git history: v1 `7f4a1d4`, v2 `4111ba9`, v3 `5e5994b`, v4 `2c5be8e`. Archive branches preserve previous editions.
+
+## Faith over Fear archive (2026-11-07)
+
+The catalog links directly to `previews/faithoverfear/index.html`. This is a partial static presentation of the preserved hero, about and mission blocks, not a complete restoration of the live store. The original domain/server is not modified. The notice explains the owner-reported server expiry and lack of server access. Current CMS media, products and reviews are unavailable and are not invented or replaced with demo stock.
+
+Only rendered HTML/CSS and locally hosted OFL fonts are included. No application source, backend, CMS, account data, secrets, forms, scripts, payment integration, analytics or service worker are included. CSP blocks scripts, form submissions and network connections. Font license notices are next to the font assets. The private application repository remains private. The static preview is maintained separately from the portfolio page generators.

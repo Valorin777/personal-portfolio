@@ -1,0 +1,434 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(font-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(font-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(font-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(font-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(font-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(font-5.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(font-6.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(font-7.ttf) format('truetype');
+}
+
+
+:root {
+  --navy:        #1a2744;
+  --navy-dark:   #111a33;
+  --gold:        #c9a84c;
+  --gold-light:  #e8d5a3;
+  --beige:       #f8f2e8;
+  --beige-dark:  #f0e6d2;
+  --burgundy:    #7a1e2e;
+  --burgundy-dk: #5a1520;
+  --white:       #ffffff;
+  --black:       #111111;
+  --gray:        #6b7280;
+  --gray-light:  #f5f5f5;
+  --text:        #2d2d2d;
+}
+
+/* Сброс в @layer base — иначе безслойный * { padding:0 } перебивал бы
+   слойные утилиты Tailwind (py-*, px-*, gap-* и т.д.) и они не работали. */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* clip (не hidden!) — не создаёт скролл-контейнер, поэтому окно прокручивается
+     нормально и position: fixed/sticky работают корректно */
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-inter), 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ── PWA / режим приложения ── */
+html { -webkit-tap-highlight-color: transparent; }
+@media all and (display-mode: standalone) {
+  /* В установленном приложении — мягкая прокрутка без «оттяжки» за края */
+  body { overscroll-behavior-y: contain; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  color: var(--navy);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+input, textarea, select, button { font-family: inherit; }
+
+/* ── Кнопки ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--burgundy);
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: var(--burgundy-dk); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--navy);
+  padding: 0.8rem 2rem;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  border: 1.5px solid var(--navy);
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-secondary:hover { background: var(--navy); color: #fff; }
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 0.875rem 2.25rem;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-gold:hover { background: #b8943f; transform: translateY(-1px); }
+
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #ffffff;
+  padding: 0.875rem 2.25rem;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  border: 1.5px solid rgba(255,255,255,0.45);
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-inter), sans-serif;
+  text-decoration: none;
+}
+.btn-outline-white:hover { border-color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.07); }
+
+/* ── Секции ── */
+.section-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--navy);
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.9rem;
+  color: #888;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.gold-divider {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0.75rem auto 2.5rem;
+  border-radius: 2px;
+}
+
+.gold-divider-sm {
+  width: 32px;
+  height: 1.5px;
+  background: var(--gold);
+  margin: 0.5rem auto 1.5rem;
+  border-radius: 2px;
+}
+
+/* ── Контейнер ── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* Только горизонтальные отступы — иначе shorthand padding обнулял бы
+     вертикальные py-* классы Tailwind (из-за этого страницы выглядели «скученно») */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container { padding-left: 2rem; padding-right: 2rem; }
+}
+@media (min-width: 1280px) {
+  .container { padding-left: 2.5rem; padding-right: 2.5rem; }
+}
+
+/* ── Карточки товаров ── */
+.product-card {
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.25s;
+  border: 1px solid #f0f0f0;
+}
+.product-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+/* ── Бейджи ── */
+.badge {
+  display: inline-block;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.badge-new { background: var(--navy); color: #fff; }
+.badge-sale { background: var(--burgundy); color: #fff; }
+.badge-hit { background: var(--gold); color: var(--navy); }
+
+/* ── Разделитель секции ── */
+.section-sep {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 0;
+}
+
+/* ── Утилиты ── */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Анимации ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(201,168,76,0); }
+}
+
+.fade-in        { animation: fadeInUp 0.5s ease both; }
+.fade-in-soft   { animation: fadeIn 0.6s ease both; }
+.scale-in       { animation: scaleIn 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Поэтапное появление (stagger) */
+.stagger > *           { animation: fadeInUp 0.5s ease both; }
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger > *:nth-child(6) { animation-delay: 0.40s; }
+
+/* Подъём при наведении */
+.hover-lift { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s; }
+.hover-lift:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(26,39,68,0.10); }
+
+/* Ховер иконок в шапке */
+.header-icon-btn:hover { background: var(--beige) !important; }
+
+/* ── Избранное: пульс сердечка ── */
+@keyframes wishPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.wish-pop { animation: wishPop 0.4s cubic-bezier(0.16,1,0.3,1); transform-origin: center; }
+.wish-btn:hover { transform: scale(1.14) !important; }
+.wish-btn:active { transform: scale(0.88) !important; }
+
+/* ── Люксовый «блик» на кнопках при наведении ── */
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: '';
+  position: absolute; top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(110deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.6s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+}
+.btn-shine:hover::after { left: 130%; }
+
+/* ── Плавное «дыхание» акцентов ── */
+@keyframes softGlow {
+  0%,100% { opacity: 0.55; }
+  50%     { opacity: 1; }
+}
+
+/* ── Люксовый ховер карточки товара (Apple-стиль) ── */
+.product-card-lux {
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+  will-change: transform;
+}
+.product-card-lux:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 24px 48px rgba(26,39,68,0.14);
+  border-color: rgba(201,168,76,0.4) !important;
+}
+.product-card-lux .pc-image {
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
+}
+.product-card-lux:hover .pc-image { transform: scale(1.07); }
+.product-card-lux .pc-photo-alt { transition: opacity 0.4s ease; }
+.product-card-lux:hover .pc-photo-alt { opacity: 1 !important; }
+.product-card-lux .pc-cta { transition: background 0.3s, letter-spacing 0.3s; }
+.product-card-lux:hover .pc-cta { background: var(--burgundy) !important; letter-spacing: 0.14em !important; }
+.product-card-lux .pc-fav { transition: transform 0.2s, color 0.2s, background 0.2s; }
+.product-card-lux .pc-fav:hover { transform: scale(1.12); color: var(--burgundy) !important; background: #fff !important; }
+
+/* Золотое подчёркивание ссылок навигации */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 100%; height: 1.5px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-underline:hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, .fade-in, .fade-in-soft, .scale-in, .stagger > * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Focus visible ── */
+*:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+
+:root{--font-inter:Inter;--font-playfair:'Playfair Display'}
+.archive-notice{background:#f8f2e8;border-bottom:1px solid #ddd0b5;padding:22px max(20px,calc((100% - 1200px)/2));font-size:14px;color:#34405a;line-height:1.65}.archive-notice strong{color:#1a2744}.archive-notice p{max-width:960px;margin:8px 0}.archive-nav{display:flex;gap:12px 24px;flex-wrap:wrap;margin-top:14px}.archive-nav a{text-decoration:underline;text-underline-offset:4px;font-weight:600}.archive-header{max-width:1280px;margin:auto;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.archive-header b{font-family:'Playfair Display',Georgia,serif;font-size:22px}.archive-header span{font-size:11px;letter-spacing:.1em;color:#6b7280;text-transform:uppercase}.archive-catalog{padding:56px 24px;max-width:920px;margin:auto;text-align:center}.archive-catalog h2{margin-bottom:18px;font-size:32px}.archive-catalog p{margin:14px 0;color:#626773}.archive-footer{padding:36px 24px;background:#111a33;color:white;display:flex;gap:20px;flex-wrap:wrap;justify-content:center;font-size:14px}.archive-footer a{text-decoration:underline}.archive-notice details{margin-top:12px}.archive-notice summary{cursor:pointer;font-weight:600}section{scroll-margin-top:20px}@media(max-width:480px){.archive-notice{font-size:13px}.archive-header{padding:18px 20px}.archive-header b{font-size:20px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

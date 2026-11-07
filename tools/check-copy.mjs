@@ -14,4 +14,10 @@ assert(phone.test('<a href="tel:+70000000000">test</a>'));
 assert(phone.test('<meta name="telephone" content="+7 (000) 000-00-00">'));
 console.log(`Copy/privacy checks passed for ${pages.length} pages; phone detection covers links and metadata.`);
 
-for(const p of pages)assert(!/faithoverfear|Faith over Fear/i.test(read(p)),`${p}: withdrawn project resurfaced`);
+const preview=read('dist/previews/faithoverfear/index.html');
+assert(preview.includes('заказчик не продлил сервер'));
+assert(preview.includes('Частичный') || preview.includes('частичная'));
+assert(!/<script|<form|<input|fetch\(/i.test(preview));
+assert(!/https:\/\/github.com\/Valorin777\/faithoverfear/i.test(read('dist/projects/faithoverfear.html')));
+assert(read('dist/work.html').includes('href="previews/faithoverfear/index.html"'));
+console.log('Faith archive privacy, disclosure and catalog-link checks passed.');
