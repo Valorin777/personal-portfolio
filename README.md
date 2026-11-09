@@ -1,7 +1,7 @@
 # Valerii Charygin — personal portfolio
 
 Russian-language multipage personal portfolio, edition 05.
-Live: https://valorin777.github.io/personal-portfolio/
+Live: https://valorininfo.online/
 
 ## Run and publish
 
@@ -15,7 +15,7 @@ The homepage contains a native-scroll sequence of three full-screen projects. Pa
 
 The pause control and system reduced-motion preference use a static, accessible sequence. Short landscape viewports also use ordinary document flow. Navigation and case links remain available without JavaScript. See QA.md for actual browser checks and their limits.
 
-The site has 17 content pages: home, catalog, biography, credits and 13 individual project cases. A legacy `projects/pocket-chef.html` redirect preserves old links to the unified L’atelier / Pocket Chef case. Categories: Красота (4), Бизнес (5), Эксперименты (4). Hash filters are shareable.
+The site has 18 content pages: home, catalog, biography, credits and 14 individual project cases. A legacy `projects/pocket-chef.html` redirect preserves old links to the unified L’atelier / Pocket Chef case. Categories: Красота (4), Бизнес (6), Эксперименты (4). Hash filters are shareable.
 
 ## Content and contacts
 

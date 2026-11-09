@@ -83,3 +83,12 @@ ce52f3c0ba55edad0a26d9e967d31fce17c4043e0ba7580a47d40ba4428e080f  last-wind-roni
 d648034c4a0da774f98ad32c2d0458cdf9eb329c0f9aa0b29252fe5dcebbacc2  last-wind-preview.jpg
 36ab90e0d73f6e748ca01e01ff3c116f20568ab80baf9c9abd4680591ffc4e76  sochi.jpg
 ```
+
+## XcelMini addition — 2026-11-09
+
+`dist/assets/v5/xcelmini-site.jpg` is a real browser capture of the published
+[Excel trainer](https://valorin777.github.io/xcelmini/), cropped to its yellow hero.
+Dimensions: 788 × 420; 37940 bytes. It contains the app interface and
+illustration, without user profile data or browser chrome.
+
+SHA256: `c758d9d2ce6aab0483636f48b9d7af50be7c0a4fedc5ff7eee3cd1c47529a24c`.

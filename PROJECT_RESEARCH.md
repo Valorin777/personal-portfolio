@@ -58,3 +58,14 @@ Data validation checks unique slugs, required scalar/array fields, four feature 
 ## Professional biography update
 
 The user explicitly requested that Faith over Fear be described as commissioned work. This direct user statement establishes the client-project relationship without requiring a public client name or contract. The portfolio copy now marks it as a client store project. Professional background and stack evidence are mapped in `BIO_EVIDENCE.md`; missing first-year and Moscow details are not inferred from repository activity.
+
+## XcelMini — 2026-11-09
+
+The owner explicitly requested this portfolio addition after developing and deploying
+XcelMini in the current task. The public Mini App is available at
+https://valorin777.github.io/xcelmini/. It has 10 lessons, 30 independent quest
+challenges grouped into 10 missions, optional timing, progress sync in Telegram
+and a configured Excel tutor. React/TypeScript/Vite form the frontend; Node.js
+and SQLite provide the API, bot and progress storage. No client identity, revenue,
+audience or measured educational results are claimed. The source repository remains
+private and is not linked or published by this portfolio update.

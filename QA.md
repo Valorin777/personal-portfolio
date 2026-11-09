@@ -54,3 +54,12 @@ Phone screenshots have a saved raster of **375 × 812**, distinct from the confi
 - Viewport tests do not substitute for physical iPhone/Android hardware, low-end-device performance, a full assistive-technology audit, or every browser engine.
 - External project backends, payments and game completion are outside this portfolio QA. External contact-account ownership was not rechecked in this v5 pass.
 - Deployment and public-byte verification are not claimed here; the root records those separately after performing them.
+
+## XcelMini case — 2026-11-09
+
+Generated the catalog and individual case from project-data.json. `npm run check`
+passed for 20 HTML pages and 14 catalog entries. Categories are 4 / 6 / 4.
+The Business filter and card-to-case navigation were verified in the local browser.
+The case was checked at the normal desktop viewport and 375 px mobile width; no
+horizontal overflow was found, the 788 × 420 cover loaded, and the demo button
+points to the published Mini App. No contact data or private source links were added.
