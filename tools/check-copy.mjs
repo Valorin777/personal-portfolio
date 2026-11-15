@@ -21,3 +21,11 @@ assert(!/<script|<form|<input|fetch\(/i.test(preview));
 assert(!/https:\/\/github.com\/Valorin777\/faithoverfear/i.test(read('dist/projects/faithoverfear.html')));
 assert(read('dist/work.html').includes('href="previews/faithoverfear/index.html"'));
 console.log('Faith archive privacy, disclosure and catalog-link checks passed.');
+
+const hse=JSON.parse(read('project-data.json')).find(p=>p.slug==='hse-coffee');
+assert.equal(hse.demo,'https://t.me/hse_coffeeee_bot');
+assert.equal(hse.repo,null);
+assert(hse.summary.includes('Совместная работа с Арсением'));
+assert(read('dist/projects/hse-coffee.html').includes('не официальный сервис университета'));
+assert(read('dist/work.html').includes('projects/hse-coffee.html'));
+console.log('HSE authorship, privacy and destination checks passed.');

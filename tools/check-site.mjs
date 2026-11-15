@@ -13,7 +13,7 @@ for(const file of files){
  const hrefs=[...html.matchAll(/\bhref="([^"]+)"/g)].map(match=>match[1]);
  const redirect=/<meta\b[^>]*http-equiv="refresh"/i.test(html);
  if(!redirect&&!hrefs.includes(contact.telegramUrl))errors.push(`${page}: missing Telegram contact from contact-data.json`);
- if(hrefs.some(href=>/^https:\/\/(?:www\.)?t\.me\//i.test(href)&&href!==contact.telegramUrl))errors.push(`${page}: Telegram link differs from contact-data.json`);
+ if(hrefs.some(href=>/^https:\/\/(?:www\.)?t\.me\//i.test(href)&&href!==contact.telegramUrl&&!(page==='projects/hse-coffee.html'&&href==='https://t.me/hse_coffeeee_bot')))errors.push(`${page}: Telegram link differs from contact-data.json`);
  if(/tel:|(?:\+7|8)[\s().-]*\d{3}[\s().-]*\d{3}[\s().-]*\d{2}[\s().-]*\d{2}/i.test(html))errors.push(`${page}: phone number or tel link must not be published`);
  if(/\bsrc="(?:[^"?#]*\/)?(?:sculpture|scroll-motion)\.js(?:[?#][^"]*)?"/i.test(html))errors.push(`${page}: obsolete pre-v5 motion script reference`);
  if(/[\p{Emoji_Presentation}\uFE0F\u2190-\u21ff\u27f0-\u27ff\u2900-\u297f\u{1f800}-\u{1f8ff}]/u.test(html))errors.push(`${relative(root,file)}: emoji or arrow glyph found`); const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);

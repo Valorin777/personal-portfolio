@@ -34,3 +34,6 @@ body.motion-paused .project-film{height:auto}body.motion-paused .film-stage{posi
 .product-word,.product-kicker{width:100%;max-width:100%;min-width:0;flex-shrink:0}.product-ui-row b{min-width:0;overflow-wrap:anywhere}
 @media(max-width:700px){.product-word,.case-cover .product-word{font-size:clamp(32px,10vw,48px)}}
 .catalog-card-media{width:100%}
+
+/* HSE Coffee: illustrative cover, not a product screenshot. */
+.visual-hse{background:radial-gradient(ellipse at 80% 10%,#775adb75,transparent 65%),#201c30}.visual-hse .product-word{letter-spacing:-.065em}.visual-hse .product-orbit{background:radial-gradient(circle at 35% 25%,#e6dcff,#7d64c5 45%,#312449 70%)}
