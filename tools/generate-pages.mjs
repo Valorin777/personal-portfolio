@@ -35,7 +35,7 @@ function header(prefix = '') {
   return `<a class="skip" href="#main-content">Перейти к содержанию</a><div id="progress" aria-hidden="true"></div>
 <header class="site-header">
 <a class="wordmark" href="${prefix}index.html" aria-label="Валерий Чарыгин — главная">Валерий Чарыгин<small>Разработка и дизайн</small></a>
-<nav class="main-nav" aria-label="Главная навигация"><a href="${prefix}work.html" aria-current="page">Проекты <sup>${num(projects.length)}</sup></a><a href="${prefix}about.html">Об авторе</a><a href="${prefix}index.html#contact">Контакт</a></nav>
+<nav class="main-nav" aria-label="Главная навигация"><a href="${prefix}work.html" aria-current="page">Проекты <sup>${num(projects.length)}</sup></a><a href="${prefix}about.html">Обо мне</a><a href="${prefix}index.html#contact">Контакт</a></nav>
 </header>`;
 }
 
@@ -62,12 +62,12 @@ function card(project, i) {
 }
 
 const filterButtons = [['all', 'Все работы'], ...Object.entries(categories)].map(([key, label]) => `<button type="button" id="${key}" data-filter="${key}" aria-pressed="${key === 'all'}">${label} <span class="filter-count">${num(key === 'all' ? projects.length : projects.filter(project => project.category === key).length)}</span></button>`).join('');
-const catalog = `${head('Проекты', `${projects.length} ${projectNoun(projects.length)} Валерия Чарыгина: визуальные сайты, сервисы, мобильные приложения и эксперименты.`)}
+const catalog = `${head('Проекты', `Мои работы: ${projects.length} ${projectNoun(projects.length)} — визуальные сайты, сервисы, мобильные приложения и эксперименты.`)}
 <body class="catalog-page" id="top">${header()}
 <main class="page-main" id="main-content">
 <section class="catalog-hero section" aria-labelledby="catalog-title"><p class="eyebrow">КАТАЛОГ / ${countLabel.toLocaleUpperCase('ru')}</p><h1 id="catalog-title">Мои проекты.</h1><div class="catalog-intro"><p>Собственные продукты, учебные проекты<br>и командные работы.</p><p>В каждом кейсе — задача, устройство проекта,<br>формат работы и текущий статус.</p></div></section>
 <section class="catalog-section section" aria-label="Каталог проектов"><div class="filter-bar" role="group" aria-label="Фильтр по направлению">${filterButtons}</div><p id="filter-status" class="filter-status" aria-live="polite" aria-atomic="true"></p><div class="catalog-grid">${projects.map(card).join('\n')}</div><p class="visual-note catalog-note">В каталоге используются снимки опубликованных страниц, официальная графика проектов и кадры видео. Типографические обложки остальных работ — иллюстрации идеи.</p></section>
-<section class="catalog-outro section reveal"><p class="eyebrow">ОБ АВТОРЕ</p><h2>Образование, стек<br>и работа над проектами.</h2><div class="contact-actions"><a class="text-link" href="about.html">Подробнее обо мне</a><a class="button button-secondary" href="${esc(contact.telegramUrl)}" ${external}>Написать в Telegram</a></div></section>
+<section class="catalog-outro section reveal"><p class="eyebrow">ОБО МНЕ</p><h2>Образование, стек<br>и работа над проектами.</h2><div class="contact-actions"><a class="text-link" href="about.html">Подробнее обо мне</a><a class="button button-secondary" href="${esc(contact.telegramUrl)}" ${external}>Написать в Telegram</a></div></section>
 </main>${footer()}</body></html>\n`;
 writeFileSync(resolve(root, 'dist/work.html'), catalog);
 mkdirSync(resolve(root, 'dist/projects'), {recursive: true});

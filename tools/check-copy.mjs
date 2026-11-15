@@ -25,7 +25,9 @@ console.log('Faith archive privacy, disclosure and catalog-link checks passed.')
 const hse=JSON.parse(read('project-data.json')).find(p=>p.slug==='hse-coffee');
 assert.equal(hse.demo,'https://t.me/hse_coffeeee_bot');
 assert.equal(hse.repo,null);
-assert(hse.summary.includes('Совместная работа с Арсением'));
+assert(hse.summary.includes('Разрабатываю вместе с однокурсником'));
 assert(read('dist/projects/hse-coffee.html').includes('не официальный сервис университета'));
 assert(read('dist/work.html').includes('projects/hse-coffee.html'));
 console.log('HSE authorship, privacy and destination checks passed.');
+
+for(const p of pages){const html=read(p);assert(!/Валерия Чарыгина|работа Валерия|с Арсением|и Арсения/.test(html),p+': third-person personal copy');}
