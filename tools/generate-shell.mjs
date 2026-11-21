@@ -9,7 +9,17 @@ const header=(active='')=>`<a class="skip" href="#main-content">Перейти �
 const footer=()=>`<footer class="site-footer"><span>© 2026 ВАЛЕРИЙ ЧАРЫГИН</span><a href="${escapeHtml(contact.telegramUrl)}" target="_blank" rel="noopener noreferrer">Telegram</a><a href="credits.html">Материалы и авторство</a><a href="#top">Наверх</a></footer>`;
 const external='target="_blank" rel="noopener noreferrer"';
 const contactActions=()=>`<div class="contact-actions"><a class="button button-primary" href="${escapeHtml(contact.telegramUrl)}" ${external}>Написать в Telegram</a></div>`;
-const home=`${head('Личное портфолио','Я делаю сайты, приложения и интерактивные истории. Мои проекты, стек и контакты.','<link rel="stylesheet" href="editorial.css?v=6.0.0">')}<body class="home-page" id="top">${header()}
+const openingHead=`<script>
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    document.documentElement.classList.add('opening-pending');
+    window.addEventListener('load', () => {
+      if (!document.querySelector('#motion:not([hidden])')) {
+        document.documentElement.classList.remove('opening-pending');
+      }
+    }, { once: true });
+  }
+</script><link rel="stylesheet" href="editorial.css?v=6.1.0">`;
+const home=`${head('Личное портфолио','Я делаю сайты, приложения и интерактивные истории. Мои проекты, стек и контакты.',openingHead)}<body class="home-page" id="top">${header()}
 <main id="main-content" tabindex="-1">
   <section class="opening section" aria-labelledby="hero-title">
     <div class="opening-copy">
@@ -20,10 +30,15 @@ const home=`${head('Личное портфолио','Я делаю сайты, 
     </div>
     <figure class="opening-figure">
       <a class="opening-art moving-art" href="projects/last-wind.html" aria-label="Открыть кейс LAST WIND">
-        <img class="opening-field" src="assets/v5/last-wind-field.webp" alt="" width="1672" height="941" fetchpriority="high">
-        <img class="opening-ronin" src="assets/v5/last-wind-ronin.webp" alt="" width="1024" height="1536">
+        <span class="opening-scene">
+          <img class="opening-field" src="assets/v5/last-wind-field.webp" alt="" width="1672" height="941" fetchpriority="high">
+          <img class="opening-ronin" src="assets/v5/last-wind-ronin.webp" alt="" width="1024" height="1536">
+        </span>
       </a>
-      <figcaption><a href="projects/last-wind.html">LAST WIND</a><span>Интерактивный фильм</span></figcaption>
+      <figcaption>
+        <div><a href="projects/last-wind.html">LAST WIND</a><span>Интерактивный фильм</span></div>
+        <button id="motion" class="motion-control" type="button" aria-pressed="false" hidden>Остановить анимацию</button>
+      </figcaption>
     </figure>
     <div class="opening-foot"><span>Бизнес-информатика, НИУ ВШЭ</span><a class="text-link" href="about.html">Обо мне</a></div>
   </section>
@@ -31,12 +46,13 @@ const home=`${head('Личное портфолио','Я делаю сайты, 
   <section class="selected-work section" id="selected" aria-labelledby="selected-title">
     <div class="selected-header">
       <h2 id="selected-title">Избранные работы</h2>
-      <button id="motion" class="motion-control" type="button" aria-pressed="false" hidden>Остановить анимацию</button>
     </div>
     <div class="editorial-grid">
       <article class="editorial-project editorial-jet">
         <a class="project-art moving-art" href="projects/rusjet.html" aria-label="Открыть кейс RusJet">
-          <video data-ambient-video muted loop playsinline preload="none" poster="assets/v5/rusjet-taxi-poster.jpg" aria-hidden="true"><source src="assets/v5/rusjet-taxi.mp4" type="video/mp4"></video>
+          <span class="project-reel">
+            <video data-ambient-video muted loop playsinline preload="none" poster="assets/v5/rusjet-taxi-poster.jpg" aria-hidden="true"><source src="assets/v5/rusjet-taxi.mp4" type="video/mp4"></video>
+          </span>
         </a>
         <div class="project-caption">
           <div><p class="project-kind">Независимый концепт</p><h3><a href="projects/rusjet.html">RusJet</a></h3></div>
@@ -45,7 +61,9 @@ const home=`${head('Личное портфолио','Я делаю сайты, 
       </article>
       <article class="editorial-project editorial-sochi">
         <a class="project-art moving-art" href="projects/sochi.html" aria-label="Открыть кейс Хроносферы">
-          <img src="assets/sochi.jpg" alt="Закат над Чёрным морем" width="1200" height="630" loading="lazy" decoding="async">
+          <span class="project-reel">
+            <img src="assets/sochi.jpg" alt="Закат над Чёрным морем" width="1200" height="630" loading="lazy" decoding="async">
+          </span>
         </a>
         <div class="project-caption">
           <div><p class="project-kind">Командный учебный проект</p><h3><a href="projects/sochi.html">Хроносфера</a></h3></div>
@@ -54,7 +72,9 @@ const home=`${head('Личное портфолио','Я делаю сайты, 
       </article>
       <article class="editorial-project editorial-okoshko">
         <a class="project-art moving-art" href="projects/okoshko.html" aria-label="Открыть кейс Окошка">
-          <img src="assets/v5/okoshko-og.png" alt="Графическая обложка сервиса Окошко" width="1200" height="630" loading="lazy" decoding="async">
+          <span class="project-reel">
+            <img src="assets/v5/okoshko-og.png" alt="Графическая обложка сервиса Окошко" width="1200" height="630" loading="lazy" decoding="async">
+          </span>
         </a>
         <div class="project-caption">
           <div><p class="project-kind">Сервис онлайн-записи</p><h3><a href="projects/okoshko.html">Окошко</a></h3></div>
@@ -84,7 +104,7 @@ const home=`${head('Личное портфолио','Я делаю сайты, 
     ${contactActions()}
     <span class="contact-handle">@${escapeHtml(contact.telegramUsername)}</span>
   </section>
-</main>${footer()}<script src="editorial.js?v=6.0.0" defer></script></body></html>`;
+</main>${footer()}<script src="editorial.js?v=6.1.0" defer></script></body></html>`;
 const about=`${head('Обо мне','Я учусь на бизнес-информатике в НИУ ВШЭ и разрабатываю сайты и приложения. Мой стек, подход и роли в проектах.')}<body class="about-page" id="top">${header('about')}<main class="page-main" id="main-content" tabindex="-1">
 <section class="about-hero section" aria-labelledby="about-title"><p class="eyebrow">ДИЗАЙН И РАЗРАБОТКА / VALORIN</p><h1 id="about-title">Валерий <em>Чарыгин</em></h1><div class="about-hero-bottom"><span class="oversized-monogram" aria-hidden="true">ВЧ</span><div><p class="large-copy">Разрабатываю сайты,<br>мобильные приложения<br>и Telegram-ботов.</p><p>Учусь на бизнес-информатике в НИУ ВШЭ и занимаюсь веб- и мобильной разработкой. В моих проектах есть сервис записи, Telegram-приложения, учебные инструменты и интерактивные веб-сцены.</p><p>«Окошко» — мой сервис записи к специалистам, а «Лекторий» — совместный проект для работы с лекциями. В отдельных кейсах описаны задачи, технологии и текущий статус.</p></div></div><dl class="about-facts reveal" aria-label="Образование и профессиональные направления"><div><dt>Образование</dt><dd>НИУ ВШЭ</dd></div><div><dt>Программа</dt><dd>Бизнес-информатика</dd></div><div><dt>Направления</dt><dd>Веб, мобильные приложения<br>и интерактивная графика</dd></div><div><dt>В работе</dt><dd>Дизайн, код<br>и AI-инструменты</dd></div></dl></section>
 <section class="about-fields section" aria-labelledby="fields-title"><div class="section-heading reveal"><p class="eyebrow">01 / ЧЕМ ЗАНИМАЮСЬ</p><h2 id="fields-title">Что я<br><em>делаю.</em></h2><p>Сервисы, учебные приложения<br>и интерактивные сайты.</p></div><div class="about-field-grid"><article class="reveal"><span class="role-label">ПРОДУКТЫ И СЕРВИСЫ</span><h3>Сервисы и приложения.</h3><p>«Окошко» помогает вести запись к специалистам, «Лекторий» собирает материалы лекций, L’atelier / Pocket Chef подбирает рецепты. Для этих задач разрабатываю интерфейсы и работу с данными.</p><div class="project-references"><a class="text-link" href="projects/okoshko.html">Окошко</a><a class="text-link" href="projects/lektoriy.html">Лекторий</a></div></article><article class="reveal"><span class="role-label">УЧЕБНЫЕ ПРИЛОЖЕНИЯ</span><h3>Практика и обучение.</h3><p>XcelMini помогает осваивать Excel через короткие уроки и сюжетный квест. B2 Sprint объединяет упражнения по английскому и повторение. Focus+ — учебный опрос об эффекте нулевой цены.</p><div class="project-references"><a class="text-link" href="projects/xcelmini.html">XcelMini</a><a class="text-link" href="projects/b2-sprint.html">B2 Sprint</a></div></article><article class="reveal"><span class="role-label">ИНТЕРАКТИВНЫЕ ИСТОРИИ</span><h3>Графика и анимация.</h3><p>В LAST WIND прокрутка управляет камерой, светом и сменой сцен. В ORBIT можно вращать и приближать вымышленные планеты. В этих проектах использую веб-графику и анимацию.</p><div class="project-references"><a class="text-link" href="projects/last-wind.html">LAST WIND</a><a class="text-link" href="projects/orbit.html">ORBIT</a></div></article></div></section>

@@ -11,7 +11,7 @@ No package dependencies. Serve `dist/` through a static HTTP server. `npm run ge
 
 The homepage opens with Valerii’s name and a composition from LAST WIND. An editorial gallery presents RusJet, Хроносфера and Окошко alongside a category index.
 
-Title, copy and controls remain in document flow. Scroll motion moves only the layers of the opening image. RusJet video plays while visible, with a poster fallback. The motion button and the system reduced-motion setting stop both effects. Project and contact links work without JavaScript.
+Title, copy and controls remain in document flow. The opening frame unfolds when the artwork enters view, and scrolling moves its layers and opens the three gallery images along diagonal cuts. RusJet video plays while visible, with a poster fallback. The motion button and system reduced-motion setting show the full static artwork. Project and contact links work without JavaScript.
 
 The site has 19 content pages, including 15 project cases, plus the Pocket Chef redirect and the separate Faith over Fear preview. Categories: Красота (4), Бизнес (7), Эксперименты (4).
 
