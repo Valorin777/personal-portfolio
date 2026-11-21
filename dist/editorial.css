@@ -1,0 +1,272 @@
+/* An editorial cover followed by a gallery. Captions stay in normal flow. */
+.opening {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
+  column-gap: clamp(32px, 6.3vw, 116px);
+  align-items: center;
+  padding-top: clamp(40px, 6vw, 102px);
+}
+.opening-copy, .opening-figure { min-width: 0; }
+.edition-note {
+  margin: 0 0 clamp(21px, 3.1vw, 43px);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.opening h1 {
+  margin: 0;
+  font-size: clamp(3.5rem, 7.7vw, 8.75rem);
+  line-height: 1.035;
+  letter-spacing: -0.046em;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.opening h1 span { display: block; }
+.opening-lead {
+  margin: clamp(21px, 3vw, 40px) 0 0;
+  max-width: 27ch;
+  font-size: clamp(1.1rem, 1.1rem + 0.58vw, 1.65rem);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px clamp(20px, 3.6vw, 46px);
+  margin-top: clamp(23px, 3vw, 43px);
+}
+.opening-figure { margin: 0; }
+.opening-art,
+.project-art {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  overflow: clip;
+  border-radius: 3px;
+  background: #202332;
+}
+.opening-art {
+  aspect-ratio: 1.12;
+  min-height: 15rem;
+  background: #303345;
+}
+.opening-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(154deg, #989fc416, transparent 46%, #11141c48 100%);
+  pointer-events: none;
+}
+.opening-art img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  pointer-events: none;
+}
+.opening-field {
+  width: 108%;
+  height: 108%;
+  inset: -4%;
+  object-fit: cover;
+  object-position: 43% 57%;
+  transform: translate3d(0, var(--field-y, 0px), 0);
+}
+.opening-ronin {
+  width: 82%;
+  height: auto;
+  right: -2%;
+  top: 1%;
+  transform: translate3d(0, var(--ronin-y, 0px), 0);
+  filter: drop-shadow(0 6px 26px #07091850);
+}
+.opening-art:focus-visible,
+.project-art:focus-visible { outline-offset: 5px; }
+.opening-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  justify-content: space-between;
+  margin-top: 0.85rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.opening-figure figcaption a {
+  font-weight: 700;
+  color: var(--ink);
+}
+.opening-figure figcaption a:hover { text-decoration: underline; }
+.opening-foot {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem 1.4rem;
+  border-top: 1px solid var(--rule);
+  margin-top: clamp(34px, 5vw, 84px);
+  padding-block: 0.65rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.opening-foot .text-link { font-size: inherit; }
+
+.selected-work { padding-block: clamp(66px, 9vw, 152px) clamp(56px, 7vw, 112px); }
+.selected-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(30px, 4.5vw, 70px);
+}
+.selected-header h2, .personal-essay h2, .editorial-contact h2 {
+  margin: 0;
+  font-size: clamp(2.3rem, 1.4rem + 4.2vw, 5.75rem);
+  letter-spacing: -0.05em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.motion-control {
+  min-block-size: 44px;
+  max-inline-size: 100%;
+  padding: .5rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  font: inherit;
+  font-size: .875rem;
+  text-align: left;
+  color: var(--muted);
+  background: none;
+  cursor: pointer;
+}
+.motion-control:hover { color: var(--ink); border-color: var(--accent); }
+.editorial-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
+  gap: clamp(34px, 5.8vw, 94px) clamp(26px, 5vw, 80px);
+  align-items: start;
+}
+.editorial-project { min-inline-size: 0; }
+.editorial-sochi { padding-top: clamp(18px, 7.7vw, 120px); }
+.editorial-jet .project-art { aspect-ratio: 1.58; }
+.editorial-sochi .project-art { aspect-ratio: 1.28; }
+.project-art img, .project-art video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(var(--media-scale, 1));
+  transition: transform 540ms cubic-bezier(.19,.8,.3,1);
+}
+.editorial-sochi img { object-position: center; }
+.editorial-jet video { object-position: 47% center; }
+.project-art:hover { --media-scale: 1.045; }
+.project-caption {
+  border-bottom: 1px solid var(--rule);
+  padding: clamp(18px, 2vw, 30px) 0 clamp(20px, 2.5vw, 35px);
+}
+.project-kind {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: .875rem;
+  line-height: 1.55;
+}
+.project-caption h3 {
+  margin: 0;
+  font-size: clamp(1.95rem, 1.25rem + 2.8vw, 4rem);
+  line-height: 1.12;
+  letter-spacing: -.044em;
+  overflow-wrap: anywhere;
+}
+.project-caption h3 a:hover { color: var(--accent); }
+.project-caption > p {
+  max-width: 46ch;
+  margin: .8rem 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.editorial-okoshko {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 1.2rem clamp(28px, 6vw, 104px);
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-block: clamp(12px, 4vw, 60px) 0;
+}
+.editorial-okoshko .project-art {
+  aspect-ratio: 1200 / 630;
+  background: #ede8e2;
+}
+.editorial-okoshko img { object-fit: contain; }
+.editorial-okoshko .project-caption { border-bottom: 0; }
+.work-index {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 clamp(16px, 2.7vw, 48px);
+  margin-top: clamp(46px, 7vw, 105px);
+}
+.work-index a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .3rem .75rem;
+  min-block-size: 3.3rem;
+  padding: .85rem 0;
+  border-block: 1px solid var(--rule);
+  line-height: 1.45;
+}
+.work-index strong { font-weight: 700; overflow-wrap: anywhere; }
+.work-index span { color: var(--muted); font-size: .875rem; font-variant-numeric: tabular-nums; }
+.work-index a:hover { border-color: var(--accent); color: var(--accent); }
+.personal-essay {
+  display: grid;
+  grid-template-columns: minmax(0, .75fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  padding-block: clamp(54px, 8vw, 126px);
+}
+.personal-essay h2 { font-size: clamp(2.2rem, 1.4rem + 3.1vw, 4.5rem); }
+.personal-essay p { max-width: 49ch; margin: 0 0 1.1rem; font-size: clamp(1rem, .92rem + .45vw, 1.35rem); }
+.editorial-contact {
+  position: relative;
+  padding-block: clamp(46px, 7vw, 112px);
+  border-top: 1px solid var(--rule);
+}
+.editorial-contact h2 { font-size: clamp(3rem, 2rem + 5vw, 7.2rem); }
+.editorial-contact .contact-actions { margin-top: 1.8rem; }
+.editorial-contact .contact-handle { display: inline-block; margin-top: 1rem; color: var(--muted); }
+
+@media (max-width: 1000px) {
+  .opening { column-gap: clamp(24px, 4vw, 44px); }
+  .opening h1 { font-size: clamp(3rem, 8.45vw, 6.5rem); }
+  .opening-art { aspect-ratio: 1; }
+  .opening-ronin { top: 0; right: -5%; width: 91%; }
+}
+@media (max-width: 700px) {
+  .opening { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; padding-top: clamp(32px, 8vw, 52px); }
+  .opening h1 { font-size: clamp(2.05rem, 10.6vw, 3.9rem); }
+  .editorial-sochi .project-caption h3 { font-size: clamp(1.3rem, 6.8vw, 2.7rem); }
+  .opening-figure { margin-top: .6rem; }
+  .opening-art { aspect-ratio: 1.25; min-height: 12rem; }
+  .opening-ronin { width: 77%; top: 1%; right: -1%; }
+  .opening-foot { margin-top: .25rem; }
+  .editorial-grid, .editorial-okoshko, .personal-essay { grid-template-columns: minmax(0, 1fr); }
+  .editorial-sochi, .editorial-okoshko { padding-top: 0; }
+  .editorial-okoshko { max-width: none; margin: 0; gap: 0; }
+  .editorial-okoshko .project-caption { border-bottom: 1px solid var(--rule); }
+  .editorial-sochi .project-art { aspect-ratio: 1.55; }
+  .work-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-index a:nth-child(-n+2) { border-bottom: 0; }
+}
+@media (max-width: 345px) {
+  .opening-actions { gap: .35rem 1rem; }
+}
+.motion-paused .project-art > :is(img, video) { transform: none; transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .motion-control { display: none; }
+  .moving-art :is(img, video) { transform: none; transition: none; }
+}

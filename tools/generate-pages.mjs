@@ -23,11 +23,11 @@ const external = 'target="_blank" rel="noopener noreferrer"';
 function head(title, description, prefix = '') {
   return `<!doctype html>
 <html lang="ru"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#15141b">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#12141c">
 <title>${esc(title)} — Валерий Чарыгин</title><meta name="description" content="${esc(description)}">
 <meta property="og:title" content="${esc(title)} — Валерий Чарыгин"><meta property="og:description" content="${esc(description)}"><meta property="og:type" content="website">
-<link rel="icon" href="${prefix}icon.svg" type="image/svg+xml"><link rel="preload" href="${prefix}assets/manrope-bold.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="${prefix}style.css?v=5.0.0"><script src="${prefix}app.js?v=5.0.0" defer></script>
+<link rel="icon" href="${prefix}icon.svg" type="image/svg+xml"><link rel="preload" href="${prefix}assets/manrope-regular.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="${prefix}assets/manrope-bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="${prefix}style.css?v=6.0.0"><script src="${prefix}app.js?v=6.0.0" defer></script>
 </head>`;
 }
 
@@ -64,7 +64,7 @@ function card(project, i) {
 const filterButtons = [['all', 'Все работы'], ...Object.entries(categories)].map(([key, label]) => `<button type="button" id="${key}" data-filter="${key}" aria-pressed="${key === 'all'}">${label} <span class="filter-count">${num(key === 'all' ? projects.length : projects.filter(project => project.category === key).length)}</span></button>`).join('');
 const catalog = `${head('Проекты', `Мои работы: ${projects.length} ${projectNoun(projects.length)} — визуальные сайты, сервисы, мобильные приложения и эксперименты.`)}
 <body class="catalog-page" id="top">${header()}
-<main class="page-main" id="main-content">
+<main class="page-main" id="main-content" tabindex="-1">
 <section class="catalog-hero section" aria-labelledby="catalog-title"><p class="eyebrow">КАТАЛОГ / ${countLabel.toLocaleUpperCase('ru')}</p><h1 id="catalog-title">Мои проекты.</h1><div class="catalog-intro"><p>Собственные продукты, учебные проекты<br>и командные работы.</p><p>В каждом кейсе — задача, устройство проекта,<br>формат работы и текущий статус.</p></div></section>
 <section class="catalog-section section" aria-label="Каталог проектов"><div class="filter-bar" role="group" aria-label="Фильтр по направлению">${filterButtons}</div><p id="filter-status" class="filter-status" aria-live="polite" aria-atomic="true"></p><div class="catalog-grid">${projects.map(card).join('\n')}</div><p class="visual-note catalog-note">В каталоге используются снимки опубликованных страниц, официальная графика проектов и кадры видео. Типографические обложки остальных работ — иллюстрации идеи.</p></section>
 <section class="catalog-outro section reveal"><p class="eyebrow">ОБО МНЕ</p><h2>Образование, стек<br>и работа над проектами.</h2><div class="contact-actions"><a class="text-link" href="about.html">Подробнее обо мне</a><a class="button button-secondary" href="${esc(contact.telegramUrl)}" ${external}>Написать в Telegram</a></div></section>
@@ -76,8 +76,8 @@ for (const [i, project] of projects.entries()) {
   const next = projects[(i + 1) % projects.length];
   const page = `${head(project.name, project.summary, '../')}
 <body class="case-page" id="top">${header('../')}
-<main class="page-main" id="main-content">
-<section class="case-hero section" aria-labelledby="case-title"><nav class="case-breadcrumb" aria-label="Хлебные крошки"><a href="../work.html">Все работы</a><span>${categories[project.category]} / ${num(i + 1)}</span></nav><p class="eyebrow">${esc(project.type).toLocaleUpperCase('ru')}</p><h1 id="case-title">${esc(project.name)}</h1><p class="case-intro">${esc(project.summary)}</p><div class="case-facts"><div><span>НАПРАВЛЕНИЕ</span><strong>${categories[project.category]}</strong></div><div><span>ФОРМАТ</span><strong>${esc(project.type)}</strong></div></div><div class="case-actions">${project.demo ? `<a class="button button-primary" href="${project.demo}" ${external}>${esc(project.demoLabel)}</a>` : ''}<a class="text-link" href="${esc(contact.telegramUrl)}" ${external}>Обсудить проект в Telegram</a></div></section>
+<main class="page-main" id="main-content" tabindex="-1">
+<section class="case-hero section" aria-labelledby="case-title"><nav class="case-breadcrumb" aria-label="Хлебные крошки"><a href="../work.html">Все работы</a><span>${categories[project.category]} / ${num(i + 1)}</span></nav><p class="eyebrow">${esc(project.type).toLocaleUpperCase('ru')}</p><h1 id="case-title"${project.name.length > 24 ? ' class="case-title-long"' : ''}>${esc(project.name)}</h1><p class="case-intro">${esc(project.summary)}</p><div class="case-facts"><div><span>НАПРАВЛЕНИЕ</span><strong>${categories[project.category]}</strong></div><div><span>ФОРМАТ</span><strong>${esc(project.type)}</strong></div></div><div class="case-actions">${project.demo ? `<a class="button button-primary" href="${project.demo}" ${external}>${esc(project.demoLabel)}</a>` : ''}<a class="text-link" href="${esc(contact.telegramUrl)}" ${external}>Обсудить проект в Telegram</a></div></section>
 <figure class="case-cover section reveal">${visual(project, '../', true)}<figcaption class="visual-note">${project.image ? esc(project.imageCaption || project.name + ' — визуальный материал проекта.') : 'Графическая иллюстрация идеи проекта; не снимок рабочего интерфейса.'}</figcaption></figure>
 <div class="case-content section"><section class="case-section reveal" aria-labelledby="task-title"><div><p class="eyebrow">01 / КОНТЕКСТ</p><h2 id="task-title">Задача</h2></div><div class="case-prose">${project.task.map(text => `<p>${esc(text)}</p>`).join('')}</div></section>
 <section class="case-section reveal" aria-labelledby="architecture-title"><div><p class="eyebrow">02 / РЕАЛИЗАЦИЯ</p><h2 id="architecture-title">Как устроено</h2></div><div class="case-prose">${project.architecture.map(text => `<p>${esc(text)}</p>`).join('')}<div class="case-stack">${project.stack.map(item => `<span>${esc(item)}</span>`).join('')}</div></div></section>
