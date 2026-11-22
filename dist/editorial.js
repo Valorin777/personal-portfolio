@@ -14,10 +14,13 @@
   const narrow = matchMedia('(max-width: 750px)');
   const count = panels.length;
   const visiblePanels = new Set();
+  const returnState = performance.getEntriesByType('navigation')[0]?.type === 'back_forward'
+    ? history.state?.valorinPortfolioHome : null;
+  const first = Math.max(0, panels.findIndex(panel => panel.dataset.theaterFrame === returnState?.caseId));
 
   let selected = 0;
-  let position = 0;
-  let target = 0;
+  let position = first;
+  let target = first;
   let velocity = 0;
   let paused = false;
   let frame = 0;
@@ -26,7 +29,7 @@
   let stageHeight = stage.clientHeight;
   let onscreen = false;
   let entranceVisible = false;
-  let entranceSeen = false;
+  let entranceSeen = Boolean(returnState);
   let entranceStart = null;
   let openingLift = 0;
   let openingBias = 0;
@@ -38,6 +41,36 @@
   const motionActive = () => !paused && !reduced.matches;
   const custom = (element, name, value, unit = '') =>
     element.style.setProperty(name, String(Math.round(value * 1000) / 1000) + unit);
+
+  // BFCache already restores the document. Keep the carousel choice with this
+  // history entry for browsers that rebuild the page on Back.
+  const caseLinks = [...document.querySelectorAll('main a[href^="projects/"]')];
+  window.addEventListener('pagehide', () => {
+    const link = document.activeElement;
+    try {
+      history.replaceState({ ...history.state, valorinPortfolioHome: {
+        caseId: panels[selected].dataset.theaterFrame,
+        scrollTop: scrollY,
+        focusIndex: caseLinks.indexOf(link),
+        focusHref: link?.getAttribute('href'),
+      } }, '');
+    } catch {
+      // Keep native history behavior when the browser limits state writes.
+    }
+  });
+  if (returnState) {
+    window.addEventListener('pageshow', event => {
+      if (event.persisted) return;
+      requestAnimationFrame(() => {
+        const { scrollTop, focusIndex, focusHref } = returnState;
+        if (Number.isFinite(scrollTop) && Math.abs(scrollY - scrollTop) > 2) {
+          scrollTo({ top: scrollTop, behavior: 'instant' });
+        }
+        const link = caseLinks[focusIndex];
+        if (link && link.getAttribute('href') === focusHref) link.focus({ preventScroll: true });
+      });
+    }, { once: true });
+  }
 
   function prepareImage(index) {
     const image = artwork[modulo(index, count)];
@@ -307,7 +340,7 @@
   theater.dataset.ready = '';
   stage.tabIndex = 0;
   controls.hidden = false;
-  announce(selected);
+  announce(first);
   setPose(0, 0, 0);
   syncMotion();
 })();

@@ -1,6 +1,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {homeCases,resumeHome} from './resume-home.mjs';
 import {getTheaterCases} from './theater-cases.mjs';
+import {openingFlight,flightReel} from './flight-reel.mjs';
 const data=JSON.parse(readFileSync('project-data.json','utf8'));
 const contact=JSON.parse(readFileSync('contact-data.json','utf8'));
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -38,7 +39,7 @@ const theaterFrame=({id,title,kind,art,accent,word},index)=>{
     <div class="theater-surface" style="--cover-base:${escapeHtml(accent[0])};--cover-light:${escapeHtml(accent[1])}">${cover}${surface}</div>${foreground}
   </div>`;
 };
-const home=`${head('Личное портфолио','Разрабатываю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.','<link rel="stylesheet" href="editorial.css?v=7.1.0">')}<body class="home-page" id="top">${header()}
+const home=`${head('Личное портфолио','Разрабатываю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.','<link rel="stylesheet" href="editorial.css?v=7.1.0"><link rel="stylesheet" href="flight.css?v=7.2.0">')}<body class="home-page" id="top">${header()}
 <main id="main-content" tabindex="-1">
   <section class="opening section" aria-labelledby="hero-title">
     <div class="opening-heading">
@@ -89,9 +90,11 @@ const home=`${head('Личное портфолио','Разрабатываю �
       <h2 id="selected-title">Избранные работы</h2>
       <a class="text-link" href="work.html">Все проекты <sup>${n}</sup></a>
     </div>
+${openingFlight}
     <div class="proof-grid">
       ${[okoshko,hseProof,jet].map(renderProof).join('')}
     </div>
+${flightReel}
     <div class="work-note">
       <p>Сайт бренда <a class="text-link" href="projects/faithoverfear.html">Faith over Fear</a> сделал на заказ.</p>
       <a class="text-link" href="projects/sochi.html">Хроносфера. Командный учебный проект</a>
@@ -111,7 +114,7 @@ ${resumeHome}
     ${contactActions()}
     <span class="contact-handle">@${escapeHtml(contact.telegramUsername)}</span>
   </section>
-</main>${footer()}<script src="editorial.js?v=7.1.0" defer></script></body></html>`;
+</main>${footer()}<script src="editorial.js?v=7.2.0" defer></script><script src="flight.js?v=7.2.0" defer></script></body></html>`;
 const about=`${head('Обо мне','Я учусь на бизнес-информатике в НИУ ВШЭ и разрабатываю сайты и приложения. Мой стек, подход и роли в проектах.')}<body class="about-page" id="top">${header('about')}<main class="page-main" id="main-content" tabindex="-1">
 <section class="about-hero section" aria-labelledby="about-title"><p class="eyebrow">ДИЗАЙН И РАЗРАБОТКА / VALORIN</p><h1 id="about-title">Валерий <em>Чарыгин</em></h1><div class="about-hero-bottom"><span class="oversized-monogram" aria-hidden="true">ВЧ</span><div><p class="large-copy">Разрабатываю сайты,<br>мобильные приложения<br>и Telegram-ботов.</p><p>Учусь на бизнес-информатике в НИУ ВШЭ и занимаюсь веб- и мобильной разработкой. В моих проектах есть сервис записи, Telegram-приложения, учебные инструменты и интерактивные веб-сцены.</p><p>«Окошко» — мой сервис записи к специалистам, а «Лекторий» — совместный проект для работы с лекциями. В отдельных кейсах описаны задачи, технологии и текущий статус.</p></div></div><dl class="about-facts reveal" aria-label="Образование и профессиональные направления"><div><dt>Образование</dt><dd>НИУ ВШЭ</dd></div><div><dt>Программа</dt><dd>Бизнес-информатика</dd></div><div><dt>Направления</dt><dd>Веб, мобильные приложения<br>и интерактивная графика</dd></div><div><dt>В работе</dt><dd>Дизайн, код<br>и AI-инструменты</dd></div></dl></section>
 <section class="about-fields section" aria-labelledby="fields-title"><div class="section-heading reveal"><p class="eyebrow">01 / ЧЕМ ЗАНИМАЮСЬ</p><h2 id="fields-title">Что я<br><em>делаю.</em></h2><p>Сервисы, учебные приложения<br>и интерактивные сайты.</p></div><div class="about-field-grid"><article class="reveal"><span class="role-label">ПРОДУКТЫ И СЕРВИСЫ</span><h3>Сервисы и приложения.</h3><p>«Окошко» помогает вести запись к специалистам, «Лекторий» собирает материалы лекций, L’atelier / Pocket Chef подбирает рецепты. Для этих задач разрабатываю интерфейсы и работу с данными.</p><div class="project-references"><a class="text-link" href="projects/okoshko.html">Окошко</a><a class="text-link" href="projects/lektoriy.html">Лекторий</a></div></article><article class="reveal"><span class="role-label">УЧЕБНЫЕ ПРИЛОЖЕНИЯ</span><h3>Практика и обучение.</h3><p>XcelMini помогает осваивать Excel через короткие уроки и сюжетный квест. B2 Sprint объединяет упражнения по английскому и повторение. Focus+ — учебный опрос об эффекте нулевой цены.</p><div class="project-references"><a class="text-link" href="projects/xcelmini.html">XcelMini</a><a class="text-link" href="projects/b2-sprint.html">B2 Sprint</a></div></article><article class="reveal"><span class="role-label">ИНТЕРАКТИВНЫЕ ИСТОРИИ</span><h3>Графика и анимация.</h3><p>В LAST WIND прокрутка управляет камерой, светом и сменой сцен. В ORBIT можно вращать и приближать вымышленные планеты. В этих проектах использую веб-графику и анимацию.</p><div class="project-references"><a class="text-link" href="projects/last-wind.html">LAST WIND</a><a class="text-link" href="projects/orbit.html">ORBIT</a></div></article></div></section>
