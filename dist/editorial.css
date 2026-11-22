@@ -55,10 +55,9 @@
   box-shadow: inset 0 0 0 1px #b9bfff22, inset 0 -40px 84px #14132055;
 }
 .theater-stage {
+  --theater-depth: clamp(630px, 90vw, 1420px);
   position: relative;
   height: clamp(310px, 32vw, 500px);
-  perspective: clamp(630px, 90vw, 1420px);
-  perspective-origin: 50% 47%;
 }
 .theater-stage:focus-visible { outline-offset: -4px; }
 .project-theater[data-ready] .theater-stage { touch-action: pan-y pinch-zoom; cursor: grab; user-select: none; }
@@ -67,7 +66,8 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  transform-style: preserve-3d;
+  perspective: var(--theater-depth);
+  perspective-origin: 50% 47%;
 }
 .theater-frame {
   position: absolute;
@@ -75,6 +75,7 @@
   top: 49%;
   width: var(--panel-width, 63%);
   height: var(--panel-height, 78%);
+  z-index: var(--pose-stack, 2);
   transform: translate3d(calc(-50% + var(--pose-x, 0px)), calc(-50% + var(--pose-y, 0px)), var(--pose-z, 42px))
     rotateY(var(--pose-yaw, 0deg)) rotateX(var(--pose-pitch, 0deg)) rotateZ(var(--pose-roll, 0deg))
     scale(var(--pose-size, 1));
@@ -82,6 +83,7 @@
   backface-visibility: hidden;
 }
 .theater-frame[data-home-pose="left"] {
+  --pose-stack: 1;
   --pose-x: -34vw;
   --pose-z: -245px;
   --pose-yaw: 37deg;
@@ -91,6 +93,7 @@
   --pose-shade: .34;
 }
 .theater-frame[data-home-pose="right"] {
+  --pose-stack: 1;
   --pose-x: 34vw;
   --pose-z: -245px;
   --pose-yaw: -37deg;
@@ -281,7 +284,7 @@
   .opening-actions { gap: .2rem .85rem; }
   .opening-actions .button { width: auto; font-size: .875rem; padding-inline: .8rem; }
   .opening-actions .text-link { font-size: .875rem; }
-  .theater-stage { height: clamp(224px, 68vw, 400px); perspective: clamp(455px, 105vw, 780px); }
+  .theater-stage { --theater-depth: clamp(455px, 105vw, 780px); height: clamp(224px, 68vw, 400px); }
   .theater-frame[data-theater-frame="last-wind"] { --panel-width: 77%; --panel-height: 77%; }
   .theater-frame[data-theater-frame="rusjet"] { --panel-width: 81%; --panel-height: 64%; }
   .theater-frame[data-theater-frame="okoshko"] { --panel-width: 74%; --panel-height: 57%; }

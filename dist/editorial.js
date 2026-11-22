@@ -55,9 +55,12 @@
       const rear = clamp((distance - 1) * 2, 0, 1);
       const sideYaw = panel.dataset.theaterFrame === 'okoshko' ? 43 : 37;
       const lift = (1 - near) * entrance;
+      const depth = mix(42, -245, near) - rear * 260 + lift * 74 - departure * 140;
       custom(panel, '--pose-x', side * offset * (1 - rear * .55), 'px');
       custom(panel, '--pose-y', near * 18 - lift * stageHeight * .15 - departure * 30, 'px');
-      custom(panel, '--pose-z', mix(42, -245, near) - rear * 260 + lift * 74 - departure * 140, 'px');
+      custom(panel, '--pose-z', depth, 'px');
+      // Sort projected planes explicitly so compositing does not reorder them in WebKit.
+      custom(panel, '--pose-stack', Math.round(depth));
       custom(panel, '--pose-yaw', -sideYaw * offset + 14 * lift, 'deg');
       custom(panel, '--pose-pitch', -32 * lift + departure * (13 + near * 12), 'deg');
       custom(panel, '--pose-roll', 5 * offset + 7 * lift, 'deg');
