@@ -3,8 +3,8 @@
   const page = document.querySelector('.folio-page');
   if (!page) return;
   const intro = page.querySelector('[data-folio-intro]');
-  const strip = intro.querySelector('[data-folio-proof]');
-  const cards = [...strip.querySelectorAll('[data-proof-card]')];
+  const strip = intro?.querySelector('[data-folio-proof]');
+  const cards = [...(strip?.querySelectorAll('[data-proof-card]') ?? [])];
   const sections = [...page.querySelectorAll('[data-folio-section]')];
   const navLinks = [...page.querySelectorAll('[data-folio-nav] nav a')];
   const theater = page.querySelector('.project-theater');
@@ -19,7 +19,7 @@
     const vh = innerHeight;
     // Measure adjacent chapters together and only move their decorative art.
     const offsets = sections.map(section => section.getBoundingClientRect().top);
-    const spread = strip.getBoundingClientRect();
+    const spread = strip?.getBoundingClientRect() ?? {height:0,top:0,bottom:0};
     const phase = clamp(-spread.top / (spread.height * .72 || 1));
     if (active) {
       let arranging = false;

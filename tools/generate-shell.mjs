@@ -3,6 +3,7 @@ import {homeCases} from './resume-home.mjs';
 import {getTheaterCases} from './theater-cases.mjs';
 import {renderFlightReel} from './flight-reel.mjs';
 import {renderEditorialArt} from './editorial-art.mjs';
+import {cineArt} from './cine-art.mjs';
 const data=JSON.parse(readFileSync('project-data.json','utf8'));
 const contact=JSON.parse(readFileSync('contact-data.json','utf8'));
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -30,18 +31,35 @@ const theaterFrame=({id,title,kind,art,accent,word},index)=>{
 };
 const projectFor=id=>data.find(p=>p.slug===id);
 const cFor=id=>theaterCases.find(p=>p.id===id);
-const featured=[
-  {id:'okoshko',kind:'Собственный продукт',evidence:'Сервис записи для частных специалистов: от графика мастера до подтверждения в Telegram.'},
-  {id:'hse-coffee',kind:'Совместная разработка',evidence:'Расписание группы, оценки и дедлайны в Telegram Mini App.'},
-  {id:'last-wind',kind:'Интерактивная графика',evidence:'Камера, свет и шейдеры управляются прокруткой.'}
+const sequenceProjects=[
+  {id:'okoshko',label:'Окошко',kind:'Собственный продукт',work:'Сделал сервис записи к частным специалистам. Клиент выбирает свободное время, мастер получает подтверждение в Telegram.',credit:'Обложка и схема записи'},
+  {id:'hse-coffee',label:'Coffee',kind:'Совместная разработка',work:'Вместе с однокурсником делаю Telegram Mini App: расписание подключённых групп, оценки из ведомостей и дедлайны.',credit:'Схема учебных экранов'},
+  {id:'last-wind',label:'LAST WIND',kind:'Интерактивная графика',work:'Снятый в коде фильм: я связал движение камеры, свет и шейдерную анимацию с прокруткой.',credit:'Подлинные слои проекта'}
 ];
-const featureCard=({id,kind,evidence},index)=>{
+const cinemaBeat=({id,kind,work,credit},i)=>{
   const c=cFor(id);
-  return `<a class="folio-proof-card${index===0?' folio-proof-lead':''}" data-proof-card href="projects/${id}.html" aria-label="Открыть кейс ${escapeHtml(c.title)}">
-    <div class="folio-proof-media">${renderEditorialArt(c,{featured:true})}</div>
-    <div class="folio-proof-caption"><p class="folio-kind">${escapeHtml(kind)}</p><h3>${escapeHtml(c.title)}</h3><p class="folio-evidence">${escapeHtml(evidence)}</p></div>
-  </a>`;
+  return `<article class="cine-beat" id="cine-${id}" data-cine-stop="${id}">
+    <div class="cine-beat-copy"><p class="cine-overline"><span>${i+1} / 3</span>${escapeHtml(kind)}</p>
+    <h2>${escapeHtml(c.title)}</h2><p class="cine-beat-text">${escapeHtml(work)}</p>
+    <a class="text-link cine-case-link" href="projects/${id}.html" aria-label="Открыть кейс ${escapeHtml(c.title)}">Открыть кейс</a></div>
+    <figure class="cine-static-preview">${renderEditorialArt(c,{featured:true})}<figcaption>${escapeHtml(credit)}</figcaption></figure>
+  </article>`;
 };
+const cinemaStage=`<div class="cine-stage-wrap">
+  <div class="cine-stage" data-cine-stage>
+    <div class="cine-frame" aria-hidden="true">
+      <div class="cine-projection"></div>
+      <div class="cine-sweep"></div>
+      <div class="cine-world" data-cine-world>
+        ${sequenceProjects.map(({id})=>`<div class="cine-plate" data-cine-plate="${id}">${cineArt[id]}</div>`).join('')}
+      </div>
+      <div class="cine-branding"><span>ВЫБРАННЫЕ ПРОЕКТЫ</span><span data-cine-frame-index>01 / 03</span></div>
+    </div>
+    <nav class="cine-scene-index" aria-label="Три избранные работы">
+      ${sequenceProjects.map(({id,label},i)=>`<a href="#cine-${id}" data-cine-tab="${id}"${i===0?' aria-current="location"':''} aria-label="${escapeHtml(cFor(id).title)}"><span aria-hidden="true">0${i+1}</span>${escapeHtml(label)}</a>`).join('')}
+    </nav>
+  </div>
+</div>`;
 const galleryCard=c=>{
   const p=projectFor(c.id);
   return `<article class="folio-card" data-work-card data-work-category="${escapeHtml(p.category)}">
@@ -83,24 +101,24 @@ const theaterView=`<div class="project-theater" role="region" aria-label="Вит
   <p class="visually-hidden" id="theater-instructions">Выберите проект перетаскиванием, кнопками «Назад» и «Далее» или клавишами влево и вправо.</p>
   <p class="visually-hidden" data-theater-status aria-live="polite" aria-atomic="true"></p>
 </div>`;
-const homeStyle=['editorial.css?v=7.1.0','flight.css?v=9.0.0','reel-product-art.css?v=8.0.0','reel-experiment-art.css?v=8.0.0','editorial-art.css?v=10.0.0','folio.css?v=10.0.0'].map(f=>`<link rel="stylesheet" href="${f}">`).join('');
+const homeStyle=['editorial.css?v=7.1.0','flight.css?v=9.0.0','reel-product-art.css?v=8.0.0','reel-experiment-art.css?v=8.0.0','editorial-art.css?v=10.0.0','folio.css?v=10.0.0','cinematic.css?v=11.0.0','cine-art.css?v=11.0.0'].map(f=>`<link rel="stylesheet" href="${f}">`).join('');
 const home=`${head('Личное портфолио','Веб-разработчик Валерий Чарыгин. Сайты, Telegram Mini Apps и интерактивная графика.',homeStyle)}<body class="home-page folio-page" id="top">${homeHeader()}
 <main id="main-content" tabindex="-1">
-  <section class="folio-intro section" aria-labelledby="hero-title" data-folio-intro>
-    <div class="folio-intro-copy">
+  <section class="cine-sequence section" id="selected-sequence" aria-label="Валерий Чарыгин: избранные проекты" data-cine-sequence>
+    <div class="folio-intro-copy cine-identity" data-folio-intro>
       <p class="folio-kicker"><span></span>Веб-разработчик</p>
       <h1 id="hero-title">Валерий <span>Чарыгин</span></h1>
       <p class="folio-intro-lead">Разрабатываю веб-сервисы и Telegram Mini Apps. Делаю интерактивную графику для сайтов.</p>
       <div class="folio-intro-actions">
-        <a class="button button-primary" href="#selected">Смотреть проекты</a>
+        <a class="button button-primary" href="#cine-okoshko">Смотреть проекты</a>
         <a class="text-link" href="${escapeHtml(contact.telegramUrl)}" ${external}>Telegram</a>
       </div>
       <p class="folio-intro-meta">Бизнес-информатика, НИУ ВШЭ</p>
+      <button type="button" id="motion" class="motion-control cine-motion" aria-pressed="false" hidden>Остановить движение</button>
     </div>
-    <div class="folio-proof" aria-labelledby="proof-title">
-      <div class="folio-proof-head"><h2 id="proof-title">Избранные работы</h2><span aria-hidden="true">3 / ${n}</span></div>
-      <div class="folio-proof-grid" data-folio-proof>${featured.map(featureCard).join('')}</div>
-    </div>
+    ${cinemaStage}
+    <div class="cine-beats">${sequenceProjects.map(cinemaBeat).join('')}</div>
+    <div class="cine-finale"><a class="text-link" href="#selected">К сетке всех 15 работ</a></div>
   </section>
 
   <section class="folio-profile section" id="profile" aria-labelledby="profile-title" data-folio-section>
@@ -123,7 +141,6 @@ const home=`${head('Личное портфолио','Веб-разработч�
     <div class="folio-divider"><span>Портфолио</span></div>
     <div class="folio-work-head">
       <h2 id="selected-title">Проекты <span>${n}</span></h2>
-      <button type="button" id="motion" class="motion-control" aria-pressed="false" hidden>Остановить движение</button>
     </div>
     <div class="folio-work-controls" data-work-switch role="group" aria-label="Вид проектов" hidden>
       <button type="button" data-work-mode="grid" aria-controls="work-grid" aria-pressed="true">Сетка</button>
@@ -152,7 +169,7 @@ const home=`${head('Личное портфолио','Веб-разработч�
       <a class="button button-primary" href="${escapeHtml(contact.telegramUrl)}" ${external}>Написать в Telegram <span>@${escapeHtml(contact.telegramUsername)}</span></a>
     </div>
   </section>
-</main>${footer()}<script src="work-views.js?v=10.0.0" defer></script><script src="editorial.js?v=9.0.0" defer></script><script src="flight.js?v=9.0.0" defer></script><script src="folio.js?v=10.0.0" defer></script></body></html>`;
+</main>${footer()}<script src="work-views.js?v=10.0.0" defer></script><script src="editorial.js?v=9.0.0" defer></script><script src="flight.js?v=9.0.0" defer></script><script src="folio.js?v=11.0.0" defer></script><script src="cinematic.js?v=11.0.0" defer></script></body></html>`;
 const about=`${head('Обо мне','Я учусь на бизнес-информатике в НИУ ВШЭ и разрабатываю сайты и приложения. Мой стек, подход и роли в проектах.',innerStyle)}<body class="about-page folio-page" id="top">${header('about')}<main class="page-main" id="main-content" tabindex="-1">
 <section class="about-hero section" aria-labelledby="about-title"><p class="eyebrow">ДИЗАЙН И РАЗРАБОТКА / VALORIN</p><h1 id="about-title">Валерий <em>Чарыгин</em></h1><div class="about-hero-bottom"><span class="oversized-monogram" aria-hidden="true">ВЧ</span><div><p class="large-copy">Разрабатываю сайты,<br>мобильные приложения<br>и Telegram-ботов.</p><p>Учусь на бизнес-информатике в НИУ ВШЭ и занимаюсь веб- и мобильной разработкой. В моих проектах есть сервис записи, Telegram-приложения, учебные инструменты и интерактивные веб-сцены.</p><p>«Окошко» — мой сервис записи к специалистам, а «Лекторий» — совместный проект для работы с лекциями. В отдельных кейсах описаны задачи, технологии и текущий статус.</p></div></div><dl class="about-facts reveal" aria-label="Образование и профессиональные направления"><div><dt>Образование</dt><dd>НИУ ВШЭ</dd></div><div><dt>Программа</dt><dd>Бизнес-информатика</dd></div><div><dt>Направления</dt><dd>Веб, мобильные приложения<br>и интерактивная графика</dd></div><div><dt>В работе</dt><dd>Дизайн, код<br>и AI-инструменты</dd></div></dl></section>
 <section class="about-fields section" aria-labelledby="fields-title"><div class="section-heading reveal"><p class="eyebrow">01 / ЧЕМ ЗАНИМАЮСЬ</p><h2 id="fields-title">Что я<br><em>делаю.</em></h2><p>Сервисы, учебные приложения<br>и интерактивные сайты.</p></div><div class="about-field-grid"><article class="reveal"><span class="role-label">ПРОДУКТЫ И СЕРВИСЫ</span><h3>Сервисы и приложения.</h3><p>«Окошко» помогает вести запись к специалистам, «Лекторий» собирает материалы лекций, L’atelier / Pocket Chef подбирает рецепты. Для этих задач разрабатываю интерфейсы и работу с данными.</p><div class="project-references"><a class="text-link" href="projects/okoshko.html">Окошко</a><a class="text-link" href="projects/lektoriy.html">Лекторий</a></div></article><article class="reveal"><span class="role-label">УЧЕБНЫЕ ПРИЛОЖЕНИЯ</span><h3>Практика и обучение.</h3><p>XcelMini помогает осваивать Excel через короткие уроки и сюжетный квест. B2 Sprint объединяет упражнения по английскому и повторение. Focus+ — учебный опрос об эффекте нулевой цены.</p><div class="project-references"><a class="text-link" href="projects/xcelmini.html">XcelMini</a><a class="text-link" href="projects/b2-sprint.html">B2 Sprint</a></div></article><article class="reveal"><span class="role-label">ИНТЕРАКТИВНЫЕ ИСТОРИИ</span><h3>Графика и анимация.</h3><p>В LAST WIND прокрутка управляет камерой, светом и сменой сцен. В ORBIT можно вращать и приближать вымышленные планеты. В этих проектах использую веб-графику и анимацию.</p><div class="project-references"><a class="text-link" href="projects/last-wind.html">LAST WIND</a><a class="text-link" href="projects/orbit.html">ORBIT</a></div></article></div></section>
