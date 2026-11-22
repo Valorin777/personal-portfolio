@@ -1,0 +1,57 @@
+/* Inner folios use the same navigation, grid and accent as the homepage. */
+.folio-page .page-main{padding-block-start:0;}
+.folio-page .eyebrow{color:var(--folio-accent);letter-spacing:.13em;}
+.folio-page .site-footer{max-inline-size:var(--folio-content);padding-inline:var(--folio-gutter);color:var(--folio-muted);}
+.folio-page .visual-note{color:var(--folio-muted);}
+.folio-page .catalog-hero{padding-block:clamp(2.65rem,7.3vw,6.4rem) clamp(1.65rem,3vw,3.1rem);}
+.folio-page .catalog-hero h1{font-size:clamp(2.75rem,9.6vw,7.8rem);letter-spacing:-.08em;line-height:.96;margin-block:.35em .29em;}
+.folio-page .catalog-intro,.folio-page .catalog-card-copy p,.folio-page .case-intro,.folio-page .case-prose,.folio-page .case-columns p{color:var(--folio-muted);}
+.folio-page .catalog-section{padding-top:0}
+.folio-page .filter-bar{border-color:var(--folio-rule);gap:.5rem;}
+.folio-page .filter-bar button{min-height:44px;border-color:var(--folio-rule);background:transparent;color:var(--folio-muted);}
+.folio-page .filter-bar button[aria-pressed="true"]{color:#241b33;background:var(--folio-accent);border-color:var(--folio-accent);}
+.folio-page .filter-bar button:hover:not([aria-pressed="true"]){border-color:var(--folio-accent);color:var(--folio-ink);}
+.folio-page .catalog-grid{gap:clamp(1rem,3.2vw,2.9rem);}
+.folio-page .catalog-card{background:transparent;border-color:var(--folio-rule);border-radius:.45rem;}
+.folio-page .catalog-card-copy{padding:clamp(.85rem,2.3vw,1.45rem);}
+.folio-page .catalog-card-copy h2{color:var(--folio-ink);}
+.folio-page .case-stack span{background:#282637;border-color:#bec2e138;color:#dfd4fb;}
+.folio-page .case-hero{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.14fr);
+  align-items:center;gap:clamp(1.7rem,4.8vw,4.7rem);
+  padding-block:clamp(2rem,6vw,5.6rem) clamp(1.65rem,5.5vw,4.8rem);
+}
+.folio-page .case-lead{min-width:0;}
+.folio-page .case-breadcrumb{margin-block:0 clamp(1.7rem,5vw,3.3rem);color:var(--folio-muted);}
+.folio-page .case-hero h1{font-size:clamp(2.4rem,6.5vw,6.2rem);letter-spacing:-.067em;line-height:.98;overflow-wrap:anywhere;margin-block:.3em .28em;color:var(--folio-ink);}
+.folio-page .case-hero .case-title-long{font-size:clamp(2.4rem,5vw,5.25rem);}
+.folio-page .case-intro{font-size:clamp(1rem,1.7vw,1.25rem);line-height:1.64;margin-block:0 1.45rem;}
+.folio-page .case-facts{border-color:var(--folio-rule);margin-block:0 1.55rem;}
+.folio-page .case-facts strong{color:var(--folio-ink);}
+.folio-page .case-cover{width:100%;max-width:none;padding:0;min-width:0;margin:0;align-self:center;}
+.folio-page .case-cover .catalog-card-media{min-height:clamp(250px,31vw,450px);border-radius:7px;border:1px solid var(--folio-rule);}
+.folio-page .case-cover .catalog-card-media:not(.product-visual){display:grid;place-items:center;}
+.folio-page .case-cover .product-visual{padding:clamp(1rem,2.4vw,2rem);}
+.folio-page .case-cover .product-word{overflow-wrap:anywhere;}
+.folio-page .case-cover .visual-note{margin-block:.7rem 0;}
+.folio-page .folio-cropped-brand{background:#322732;}
+.folio-page .catalog-card-link .folio-cropped-brand{display:grid;place-items:center;}
+.folio-page .folio-cropped-brand img{width:100%;height:auto;aspect-ratio:1200/470;object-fit:cover;object-position:top;}
+.folio-page .case-section{border-color:var(--folio-rule);}
+.folio-page .case-section h2,.folio-page .case-navigation strong{color:var(--folio-ink);}
+.folio-page .case-columns article{background:#252334;border-color:var(--folio-rule);}
+.folio-page .case-feature-number{color:var(--folio-accent);}
+.folio-page .case-navigation{border-color:var(--folio-rule);}
+.folio-page .next-project:hover{color:var(--folio-accent);}
+@media(max-width:780px){
+ .folio-page .case-hero{grid-template-columns:minmax(0,1fr);gap:clamp(1.6rem,5vw,2.4rem);padding-block-start:2rem;}
+ .folio-page .case-breadcrumb{margin-bottom:1.5rem;}
+ .folio-page .case-cover .catalog-card-media{min-height:clamp(220px,55vw,375px);}
+}
+@media(max-width:410px){
+ .folio-page .case-facts{gap:.85rem;grid-template-columns:minmax(0,.74fr) minmax(0,1fr);}
+ .folio-page .case-facts strong{overflow-wrap:anywhere;}
+ .folio-page .case-actions{align-items:flex-start;}
+ .folio-page .filter-bar{max-width:100%;flex-wrap:wrap;}
+ .folio-page .filter-bar button{padding-inline:.65rem;}
+}
