@@ -33,6 +33,16 @@ const stageCases=[...homepage.matchAll(/data-theater-case="([^"]+)"[^>]*>[\s\S]*
 const stageSlugs=new Set(stageFrames);
 if(stageFrames.length!==data.length||stageSlugs.size!==data.length||data.some(project=>!stageSlugs.has(project.slug)))errors.push('Homepage carousel must include every project once');
 if(stageCases.length!==stageFrames.length||stageCases.some((match,i)=>match[1]!==stageFrames[i]||match[2]!==stageFrames[i]))errors.push('Homepage carousel captions and case links must match the frame order');
+// The horizontal navigator does not count as a vertical scene.
+const reelScenes=[...homepage.matchAll(/<article class="flight-beat[^"]*" data-flight="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g)];
+if(reelScenes.length!==stageFrames.length||reelScenes.some((match,i)=>match[1]!==stageFrames[i]))errors.push('Vertical reel must include all projects once in carousel order');
+const reelMotion=readFileSync(resolve(root,'flight.js'),'utf8');
+for(const [,slug,scene] of reelScenes){
+ const layers=[...scene.matchAll(/data-flight-layer="(main|near|far|detail)"/g)].map(match=>match[1]);
+ if(layers.length<2||!layers.includes('main')||new Set(layers).size!==layers.length)errors.push(`Vertical reel case ${slug}: requires unique motion layers`);
+ if(!scene.includes(`data-flight-link href="projects/${slug}.html"`)||!scene.includes('class="flight-provenance"'))errors.push(`Vertical reel case ${slug}: missing case link or art provenance`);
+ if(!reelMotion.includes(`'${slug}':`))errors.push(`Vertical reel case ${slug}: missing authored motion path`);
+}
 const cards=[...catalog.matchAll(/<article\b[^>]*class="catalog-card(?: reveal)?"[^>]*data-category="([^"]+)"/g)];
 if(cards.length!==data.length)errors.push(`Expected ${data.length} project cards; found ${cards.length}`);
 const previewCount=files.filter(file=>relative(root,file).startsWith('previews/')).length;

@@ -1,0 +1,117 @@
+/* Independent editorial artwork for six product case chapters. */
+.flight-scene:is([data-scene="okoshko"],[data-scene="hse-coffee"],[data-scene="faithoverfear"],[data-scene="latelier"],[data-scene="freelance-bot"],[data-scene="lektoriy"]){container-type:inline-size}
+.flight-scene .rp-layer{position:absolute;min-inline-size:0;box-sizing:border-box;pointer-events:none}
+.flight-scene .rp-layer :is(small,b,span){display:block}
+.flight-scene .rp-layer small{font-size:clamp(.52rem,1.75cqw,.76rem);line-height:1.2;letter-spacing:.12em;font-weight:800}
+.flight-scene .rp-layer b{font-size:clamp(.92rem,4.15cqw,2.6rem);line-height:1.06;font-weight:800;letter-spacing:-.04em;overflow-wrap:normal}
+.flight-scene .rp-layer span,.flight-scene .rp-layer p{font-size:clamp(.65rem,2.18cqw,1.15rem);line-height:1.32}
+.flight-scene .rp-layer :is(img,svg){display:block;inline-size:100%}
+.flight-scene .rp-layer svg{block-size:100%}
+
+/* Окошко: brand print above the calendar plane, with a foreground booking ticket. */
+.flight-scene[data-scene="okoshko"]{background:radial-gradient(ellipse at 28% 22%,#67445a 0%,#342832 49%,#211f2a 90%);}
+.flight-scene[data-scene="okoshko"] .rp-ok-grid{z-index:1;inset:12% 7% 12% 9%;border:1px solid #f4b6c044;background:repeating-linear-gradient(0deg,#ffd7cd20 0 1px,transparent 1px 19%),repeating-linear-gradient(90deg,#ffd7cd20 0 1px,transparent 1px 14%);border-radius:3px;transform-origin:45% 82%}
+.flight-scene[data-scene="okoshko"] .rp-ok-print{z-index:2;left:8%;top:16%;width:76%}
+.flight-scene[data-scene="okoshko"] .rp-ok-print>div{aspect-ratio:1200 / 477;overflow:hidden;background:#f4f0ed;border-radius:3px;box-shadow:0 20px 40px #1b1325a0;transform:rotate(-5deg);}
+.flight-scene[data-scene="okoshko"] .rp-ok-print img{height:auto}
+.flight-scene[data-scene="okoshko"] .rp-ok-slot{z-index:3;right:7%;bottom:12%;width:47%;color:#381f2c}
+.flight-scene[data-scene="okoshko"] .rp-ok-slot>div{background:#fff4ed;border:1px solid #f4cad2;box-shadow:0 18px 29px #1b1325a0;border-radius:5px;padding:10% 11%;transform:rotate(5deg)}
+.flight-scene[data-scene="okoshko"] .rp-ok-slot b{margin:5% 0 9%}
+.flight-scene[data-scene="okoshko"] .rp-ok-slot span{display:block;margin-top:8%;font-weight:750}
+.flight-scene[data-scene="okoshko"] .rp-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6%}
+.flight-scene[data-scene="okoshko"] .rp-slots i{height:clamp(5px,2cqw,13px);border:1px solid #b77892;border-radius:2px}
+.flight-scene[data-scene="okoshko"] .rp-slots i:nth-child(2){background:#a74970}
+.flight-scene[data-scene="okoshko"] .rp-ok-tab{z-index:2;left:11%;bottom:12%;color:#f6c6cb;font-size:clamp(.51rem,1.65cqw,.88rem);letter-spacing:.14em;font-weight:800}
+
+/* Coffee: a wall timetable and a smaller grade document, not account data. */
+.flight-scene[data-scene="hse-coffee"]{background:radial-gradient(ellipse at 30% 7%,#654651,#242033 71%);color:#231e36}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-spine{z-index:1;inset:2% 4% auto;text-align:right;font-size:clamp(2.4rem,12.4cqw,8rem);font-weight:850;line-height:.76;letter-spacing:-.09em;color:#ffceb72d}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-plan{z-index:2;left:7%;top:11%;width:69%}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-plan>div{padding:10% 10% 12%;border-radius:5px;background:#ded2f5;box-shadow:0 22px 48px #140f20a0;transform:rotate(-6deg)}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-plan b,.flight-scene[data-scene="hse-coffee"] .rp-hse-grades b{margin:4% 0 9%}
+.flight-scene[data-scene="hse-coffee"] .rp-days{display:grid;grid-template-columns:repeat(5,1fr);gap:.32rem;align-items:center}
+.flight-scene[data-scene="hse-coffee"] .rp-days span{font-size:clamp(.5rem,1.6cqw,1rem);text-align:center;font-weight:800;color:#473661}
+.flight-scene[data-scene="hse-coffee"] .rp-days i{display:block;height:clamp(6px,2.7cqw,18px);border-radius:2px;background:#9f82c8}
+.flight-scene[data-scene="hse-coffee"] .rp-days i:nth-child(3n){background:#f6eefa}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-grades{z-index:3;right:7%;bottom:11%;width:49%}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-grades>div{padding:11%;border-radius:4px;background:#f2bfac;box-shadow:0 12px 45px #130d20a0;transform:rotate(8deg)}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-grades p{border-top:1px solid #412c4b45;padding:.22em 0;margin:0;font-weight:750}
+.flight-scene[data-scene="hse-coffee"] .rp-hse-note{left:9%;bottom:12%;z-index:1;color:#f4beae;font-size:clamp(.51rem,1.55cqw,.86rem);letter-spacing:.14em;font-weight:830}
+
+/* Faith: a panoramic archival photograph of the site, ring-lit like a print. */
+.flight-scene[data-scene="faithoverfear"]{background:radial-gradient(ellipse at 55% 44%,#3f3850 0%,#212239 53%,#161924 92%)}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-halo{z-index:1;inset:7% 12%;display:grid;place-items:center}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-halo>div{position:absolute;inset:2% 8%;border-radius:50%;border:1px solid #c6a45b60;transform:rotate(-12deg)}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-halo>div:nth-child(2){inset:9% 4%;transform:rotate(14deg);border-color:#c6a45b40}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-halo>div:nth-child(3){inset:14% 0%;transform:rotate(6deg);border-color:#c6a45b35}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-print{z-index:2;left:10%;width:80%;top:17%;height:64%}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-print>div{display:grid;place-items:center;height:100%;background:#1c243c;border:1px solid #8d795673;box-shadow:0 25px 42px #0c111cb0;border-radius:2px;transform:rotate(-3deg);}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-print img{height:auto;max-height:100%;object-fit:contain}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-ticket{right:7%;bottom:8%;z-index:3}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-ticket>div{padding:clamp(.48rem,1.4cqw,.94rem) clamp(.62rem,2.5cqw,1.45rem);background:#e3c78e;color:#282235;border-left:3px double #66513c;box-shadow:0 9px 22px #0c111ca0;transform:rotate(5deg)}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-ticket b{font-size:clamp(.78rem,2.13cqw,1.65rem);margin:.16em 0;font-family:Georgia,serif;letter-spacing:-.025em}
+.flight-scene[data-scene="faithoverfear"] .rp-faith-ticket span{font-size:clamp(.55rem,1.4cqw,.83rem);font-weight:760}
+
+/* L’atelier / Pocket Chef: two recipe plates and visibly different versions. */
+.flight-scene[data-scene="latelier"]{background:radial-gradient(ellipse at 74% 71%,#75443a 0%,#372c38 45%,#242232 88%);color:#322332}
+.flight-scene[data-scene="latelier"] .rp-chef-route{z-index:1;inset:12% 7%;color:#ffd2aa96}
+.flight-scene[data-scene="latelier"] .rp-chef-cloud,.flight-scene[data-scene="latelier"] .rp-chef-offline{width:44%}
+.flight-scene[data-scene="latelier"] .rp-chef-cloud{z-index:2;left:8%;top:12%}
+.flight-scene[data-scene="latelier"] .rp-chef-offline{z-index:3;right:8%;bottom:11%}
+.flight-scene[data-scene="latelier"] :is(.rp-chef-cloud,.rp-chef-offline)>div{padding:10%;background:#e2cbb7;border:1px solid #fff4db8c;border-radius:4px;box-shadow:0 15px 32px #211722a0;transform:rotate(-8deg);}
+.flight-scene[data-scene="latelier"] .rp-chef-offline>div{color:#51293c;background:#f5af8e;transform:rotate(7deg);}
+.flight-scene[data-scene="latelier"] :is(.rp-chef-cloud,.rp-chef-offline) b{margin:.16em 0 .12em;font-family:Georgia,serif}
+.flight-scene[data-scene="latelier"] :is(.rp-chef-cloud,.rp-chef-offline) span{font-weight:800}
+.flight-scene[data-scene="latelier"] .rp-plate{position:relative;display:block;margin:8% auto;width:53%;aspect-ratio:1;border-radius:50%;border:1px solid currentColor;box-shadow:inset 0 0 0 5px #fff1de8c}
+.flight-scene[data-scene="latelier"] .rp-plate i{position:absolute;inset:22%;background:radial-gradient(circle at 68% 34%,#d99060 0 12%,transparent 13%),radial-gradient(circle at 45% 70%,#a44e4e 0 19%,transparent 20%),radial-gradient(circle at 32% 39%,#703f5b 0 24%,transparent 25%),#fcde9f;border-radius:38% 62% 48% 52%;transform:rotate(22deg);}
+.flight-scene[data-scene="latelier"] .rp-chef-offline .rp-plate i{background:radial-gradient(circle at 45% 40%,#e29862 0 18%,transparent 19%),conic-gradient(from 50deg,#9d4d55 48%,#b97745 0 68%,#f1cf85 0);transform:rotate(-30deg)}
+.flight-scene[data-scene="latelier"] .rp-chef-note{left:9%;bottom:9%;width:35%;font-size:clamp(.49rem,1.4cqw,.86rem);line-height:1.3;color:#ffd1a6;letter-spacing:.11em;font-weight:800}
+
+/* The bot pipeline converges in one filter, then outputs a human-reviewed draft. */
+.flight-scene[data-scene="freelance-bot"]{background:radial-gradient(ellipse at 71% 45%,#39445c 0%,#242940 54%,#1d1f31 96%);color:#e6ebfc}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-route{z-index:1;inset:13% 0%;color:#92b5f3c0;background:linear-gradient(90deg,transparent 97%,#b4c3f315 98%);background-size:14% 100%}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-in{left:5%;top:17%;width:39%;z-index:2}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-in>div{padding:11%;border:1px solid #9aa9e058;border-radius:6px;background:#282d48;box-shadow:0 13px 24px #11122399;transform:rotate(-7deg)}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-in b{margin:.16em 0 .43em}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-in i{display:block;background:#9bade263;border-radius:2px;width:71%;height:.22em;margin:.36em 0}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-in i:nth-of-type(2){width:87%;background:#b7b7ed}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-in i:nth-of-type(3){width:50%}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-filter{z-index:3;left:35%;bottom:20%;width:29%;color:#26273e}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-filter>div{padding:13% 12%;border-radius:50%;aspect-ratio:1;max-height:clamp(4.8rem,18cqw,11rem);min-width:0;display:grid;place-items:center;align-content:center;text-align:center;background:#b8addf;box-shadow:0 13px 28px #100e2090;transform:rotate(-9deg);}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-filter b{font-size:clamp(.7rem,2.8cqw,1.45rem);margin:.1em 0}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-draft{z-index:4;right:6%;top:24%;width:41%;color:#25283e}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-draft>div{padding:12%;border-radius:5px;background:#dce8f8;box-shadow:0 12px 34px #111223ae;transform:rotate(7deg);}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-draft b{margin:.26em 0 .32em;font-size:clamp(.92rem,3.95cqw,2.4rem)}
+.flight-scene[data-scene="freelance-bot"] .rp-bot-draft p{margin:0;padding-top:.35em;border-top:1px solid #7f87a0;font-weight:750}
+
+/* Лекторий: a recording waveform moves behind an annotated paper notebook. */
+.flight-scene[data-scene="lektoriy"]{background:radial-gradient(ellipse at 46% 35%,#565178 0%,#2f2c48 60%,#242236 95%);}
+.flight-scene[data-scene="lektoriy"] .rp-lec-back{z-index:1;inset:13% 9% 11% 11%;border:1px solid #bababd47;transform-origin:40% 78%;}
+.flight-scene[data-scene="lektoriy"] .rp-lec-back>div{height:100%;border-bottom:1px solid #f3dfc456;background:repeating-linear-gradient(0deg,transparent 0 16px,#aaa4d029 17px 18px);transform:rotate(-5deg)}
+.flight-scene[data-scene="lektoriy"] .rp-lec-wave{z-index:2;left:7%;top:12%;width:72%;color:#eee8fb}
+.flight-scene[data-scene="lektoriy"] .rp-lec-wave>div{padding:8% 8% 6%;background:#282440;border:1px solid #a699d96c;border-radius:7px;box-shadow:0 14px 30px #151127aa;transform:rotate(-6deg)}
+.flight-scene[data-scene="lektoriy"] .rp-lec-wave b{margin:.17em 0 .35em}
+.flight-scene[data-scene="lektoriy"] .rp-lec-wave i{display:flex;align-items:center;justify-content:space-evenly;height:clamp(22px,9cqw,72px)}
+.flight-scene[data-scene="lektoriy"] .rp-lec-wave em{width:2.5%;height:var(--rp-wave);background:linear-gradient(#dea8c6,#a9acf4);border-radius:24px}
+.flight-scene[data-scene="lektoriy"] .rp-lec-paper{z-index:3;right:8%;bottom:8%;width:48%;color:#352b3d}
+.flight-scene[data-scene="lektoriy"] .rp-lec-paper>div{padding:11% 9% 10% 13%;border-left:6px double #d2ab87;background:#f6dfc3;background-image:repeating-linear-gradient(0deg,#9d768427 0 1px,transparent 1px 17px);border-radius:2px;box-shadow:0 15px 32px #180f27a6;transform:rotate(8deg)}
+.flight-scene[data-scene="lektoriy"] .rp-lec-paper b{margin:.12em 0 .29em;font-family:Georgia,serif}
+.flight-scene[data-scene="lektoriy"] .rp-lec-paper p{margin:0 0 .1em;font-weight:750}
+.flight-scene[data-scene="lektoriy"] .rp-lec-tab{bottom:11%;left:10%;width:38%;font-size:clamp(.48rem,1.5cqw,.91rem);letter-spacing:.12em;color:#f6d8bd;font-weight:800}
+@media(max-width:480px){
+  .flight-scene[data-scene="okoshko"] .rp-ok-print{top:19%;width:82%}
+  .flight-scene[data-scene="okoshko"] .rp-ok-slot{width:53%;bottom:15%}
+  .flight-scene[data-scene="okoshko"] .rp-ok-tab{bottom:17%;width:30%}
+  .flight-scene[data-scene="hse-coffee"] .rp-hse-plan{width:71%;top:15%}
+  .flight-scene[data-scene="hse-coffee"] .rp-hse-grades{width:54%;bottom:15%}
+  .flight-scene[data-scene="hse-coffee"] .rp-hse-note{bottom:18%;width:29%}
+  .flight-scene[data-scene="faithoverfear"] .rp-faith-print{top:19%;height:56%;left:7%;width:86%}
+  .flight-scene[data-scene="latelier"] .rp-chef-cloud{top:17%}
+  .flight-scene[data-scene="latelier"] .rp-chef-offline{bottom:17%}
+  .flight-scene[data-scene="latelier"] .rp-chef-note{bottom:14%}
+  .flight-scene[data-scene="freelance-bot"] .rp-bot-in{top:20%}
+  .flight-scene[data-scene="freelance-bot"] .rp-bot-filter{bottom:19%}
+  .flight-scene[data-scene="lektoriy"] .rp-lec-wave{top:17%;width:76%}
+  .flight-scene[data-scene="lektoriy"] .rp-lec-paper{bottom:14%;width:52%}
+  .flight-scene[data-scene="lektoriy"] .rp-lec-tab{bottom:16%}
+}

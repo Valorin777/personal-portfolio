@@ -1,7 +1,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {homeCases,resumeHome} from './resume-home.mjs';
 import {getTheaterCases} from './theater-cases.mjs';
-import {openingFlight,flightReel} from './flight-reel.mjs';
+import {renderFlightReel} from './flight-reel.mjs';
 const data=JSON.parse(readFileSync('project-data.json','utf8'));
 const contact=JSON.parse(readFileSync('contact-data.json','utf8'));
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -12,19 +12,6 @@ const header=(active='')=>`<a class="skip" href="#main-content">Перейти �
 const footer=()=>`<footer class="site-footer"><span>© 2026 ВАЛЕРИЙ ЧАРЫГИН</span><a href="${escapeHtml(contact.telegramUrl)}" target="_blank" rel="noopener noreferrer">Telegram</a><a href="credits.html">Материалы и авторство</a><a href="#top">Наверх</a></footer>`;
 const external='target="_blank" rel="noopener noreferrer"';
 const contactActions=()=>`<div class="contact-actions"><a class="button button-primary" href="${escapeHtml(contact.telegramUrl)}" ${external}>Написать в Telegram</a></div>`;
-const renderProof=({id,title,kind,work})=>`<article class="proof-case proof-${id}">
-  <p class="proof-kind">${escapeHtml(kind)}</p>
-  <h3><a href="projects/${id}.html">${escapeHtml(title)}</a></h3>
-  <p>${escapeHtml(work)}</p>
-</article>`;
-const hseProof={
-  id:'hse-coffee',
-  title:'HSE Coffee',
-  kind:'Совместный проект',
-  work:'Вместе с однокурсником делаю Telegram Mini App для студентов ВШЭ с оценками и дедлайнами.'
-};
-const jet=homeCases.find(({id})=>id==='rusjet');
-const okoshko=homeCases.find(({id})=>id==='okoshko');
 const theaterCases=getTheaterCases(data,homeCases);
 const theaterFrame=({id,title,kind,art,accent,word},index)=>{
   const homePose=index===0?'center':index===1?'right':index===theaterCases.length-1?'left':'';
@@ -39,7 +26,7 @@ const theaterFrame=({id,title,kind,art,accent,word},index)=>{
     <div class="theater-surface" style="--cover-base:${escapeHtml(accent[0])};--cover-light:${escapeHtml(accent[1])}">${cover}${surface}</div>${foreground}
   </div>`;
 };
-const home=`${head('Личное портфолио','Разрабатываю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.','<link rel="stylesheet" href="editorial.css?v=7.1.0"><link rel="stylesheet" href="flight.css?v=7.2.0">')}<body class="home-page" id="top">${header()}
+const home=`${head('Личное портфолио','Разрабатываю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.','<link rel="stylesheet" href="editorial.css?v=7.1.0"><link rel="stylesheet" href="flight.css?v=8.0.0"><link rel="stylesheet" href="reel-product-art.css?v=8.0.0"><link rel="stylesheet" href="reel-experiment-art.css?v=8.0.0">')}<body class="home-page" id="top">${header()}
 <main id="main-content" tabindex="-1">
   <section class="opening section" aria-labelledby="hero-title">
     <div class="opening-heading">
@@ -51,7 +38,7 @@ const home=`${head('Личное портфолио','Разрабатываю �
         <p>Делаю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.</p>
         <div class="opening-actions">
           <a class="button button-primary" href="${escapeHtml(contact.telegramUrl)}" ${external}>Написать в Telegram</a>
-          <a class="text-link" href="#selected">Избранные работы</a>
+          <a class="text-link" href="#selected">Лента всех работ</a>
         </div>
       </div>
     </div>
@@ -87,18 +74,10 @@ const home=`${head('Личное портфолио','Разрабатываю �
 
   <section class="selected-work section" id="selected" aria-labelledby="selected-title">
     <div class="selected-header">
-      <h2 id="selected-title">Избранные работы</h2>
-      <a class="text-link" href="work.html">Все проекты <sup>${n}</sup></a>
+      <h2 id="selected-title">Все работы в движении</h2>
+      <a class="text-link" href="work.html">Открыть каталог <sup>${n}</sup></a>
     </div>
-${openingFlight}
-    <div class="proof-grid">
-      ${[okoshko,hseProof,jet].map(renderProof).join('')}
-    </div>
-${flightReel}
-    <div class="work-note">
-      <p>Сайт бренда <a class="text-link" href="projects/faithoverfear.html">Faith over Fear</a> сделал на заказ.</p>
-      <a class="text-link" href="projects/sochi.html">Хроносфера. Командный учебный проект</a>
-    </div>
+    ${renderFlightReel(theaterCases)}
     <nav class="work-index" id="project-index-title" aria-label="Каталог проектов">
       <a href="work.html"><strong>Все проекты</strong><span>${n}</span></a>
       <a href="work.html#beauty"><strong>Красота</strong><span>${categoryLabel('beauty')}</span></a>
@@ -114,7 +93,7 @@ ${resumeHome}
     ${contactActions()}
     <span class="contact-handle">@${escapeHtml(contact.telegramUsername)}</span>
   </section>
-</main>${footer()}<script src="editorial.js?v=7.2.0" defer></script><script src="flight.js?v=7.2.0" defer></script></body></html>`;
+</main>${footer()}<script src="editorial.js?v=7.2.0" defer></script><script src="flight.js?v=8.0.0" defer></script></body></html>`;
 const about=`${head('Обо мне','Я учусь на бизнес-информатике в НИУ ВШЭ и разрабатываю сайты и приложения. Мой стек, подход и роли в проектах.')}<body class="about-page" id="top">${header('about')}<main class="page-main" id="main-content" tabindex="-1">
 <section class="about-hero section" aria-labelledby="about-title"><p class="eyebrow">ДИЗАЙН И РАЗРАБОТКА / VALORIN</p><h1 id="about-title">Валерий <em>Чарыгин</em></h1><div class="about-hero-bottom"><span class="oversized-monogram" aria-hidden="true">ВЧ</span><div><p class="large-copy">Разрабатываю сайты,<br>мобильные приложения<br>и Telegram-ботов.</p><p>Учусь на бизнес-информатике в НИУ ВШЭ и занимаюсь веб- и мобильной разработкой. В моих проектах есть сервис записи, Telegram-приложения, учебные инструменты и интерактивные веб-сцены.</p><p>«Окошко» — мой сервис записи к специалистам, а «Лекторий» — совместный проект для работы с лекциями. В отдельных кейсах описаны задачи, технологии и текущий статус.</p></div></div><dl class="about-facts reveal" aria-label="Образование и профессиональные направления"><div><dt>Образование</dt><dd>НИУ ВШЭ</dd></div><div><dt>Программа</dt><dd>Бизнес-информатика</dd></div><div><dt>Направления</dt><dd>Веб, мобильные приложения<br>и интерактивная графика</dd></div><div><dt>В работе</dt><dd>Дизайн, код<br>и AI-инструменты</dd></div></dl></section>
 <section class="about-fields section" aria-labelledby="fields-title"><div class="section-heading reveal"><p class="eyebrow">01 / ЧЕМ ЗАНИМАЮСЬ</p><h2 id="fields-title">Что я<br><em>делаю.</em></h2><p>Сервисы, учебные приложения<br>и интерактивные сайты.</p></div><div class="about-field-grid"><article class="reveal"><span class="role-label">ПРОДУКТЫ И СЕРВИСЫ</span><h3>Сервисы и приложения.</h3><p>«Окошко» помогает вести запись к специалистам, «Лекторий» собирает материалы лекций, L’atelier / Pocket Chef подбирает рецепты. Для этих задач разрабатываю интерфейсы и работу с данными.</p><div class="project-references"><a class="text-link" href="projects/okoshko.html">Окошко</a><a class="text-link" href="projects/lektoriy.html">Лекторий</a></div></article><article class="reveal"><span class="role-label">УЧЕБНЫЕ ПРИЛОЖЕНИЯ</span><h3>Практика и обучение.</h3><p>XcelMini помогает осваивать Excel через короткие уроки и сюжетный квест. B2 Sprint объединяет упражнения по английскому и повторение. Focus+ — учебный опрос об эффекте нулевой цены.</p><div class="project-references"><a class="text-link" href="projects/xcelmini.html">XcelMini</a><a class="text-link" href="projects/b2-sprint.html">B2 Sprint</a></div></article><article class="reveal"><span class="role-label">ИНТЕРАКТИВНЫЕ ИСТОРИИ</span><h3>Графика и анимация.</h3><p>В LAST WIND прокрутка управляет камерой, светом и сменой сцен. В ORBIT можно вращать и приближать вымышленные планеты. В этих проектах использую веб-графику и анимацию.</p><div class="project-references"><a class="text-link" href="projects/last-wind.html">LAST WIND</a><a class="text-link" href="projects/orbit.html">ORBIT</a></div></article></div></section>
@@ -124,7 +103,7 @@ const about=`${head('Обо мне','Я учусь на бизнес-инфор�
 <section class="about-contact section" aria-labelledby="about-contact-title"><p class="eyebrow">ОБСУДИМ ВАШУ ИДЕЮ</p><h2 id="about-contact-title">На связи.</h2><p>Если хотите обсудить проект или предложить совместную работу, напишите мне в Telegram.</p>${contactActions()}<p class="contact-handle">Telegram: @${escapeHtml(contact.telegramUsername)}</p></section>
 <section class="about-next section"><p class="eyebrow">ПОДРОБНОСТИ — В РАБОТАХ</p><a class="all-work reveal" href="work.html"><span>Смотреть проекты <sup>${n}</sup></span></a><p>В каждом кейсе — задача, устройство, текущий статус и ссылки на доступные материалы.</p></section>
 </main>${footer()}</body></html>`;
-const credits=`${head('Материалы и авторство','Источники, лицензии и авторство материалов личного портфолио.')}<body id="top">${header()}<main class="page-main" id="main-content" tabindex="-1"><section class="catalog-hero section"><p class="eyebrow">МАТЕРИАЛЫ И АВТОРСТВО</p><h1>За кадром.</h1></section><div class="credits-content section"><section class="case-section"><h2>Оформление</h2><div class="case-prose"><p>В своём портфолио я использую выразительную типографику и сценарий прокрутки. Главная показывает материалы реальных проектов.</p><p>В каталоге часть обложек — графические иллюстрации идеи приложения. Они подписаны отдельно и не выдаются за снимки интерфейса.</p></div></section><section class="case-section"><h2>Материалы проектов</h2><div class="case-prose"><p>Для обложки LAST WIND я использовал снимок сайта, а для сцены — фон и AI-персонажа из проекта. «Окошко» — официальная графическая обложка сервиса. XcelMini — снимок опубликованного Excel-тренера.</p><p>Для RusJet я использовал авиационные кадры авторов <a class="text-link" href="https://www.pexels.com/video/airplane-preparing-for-take-off-1650628/" ${external}>Jake Heinemann</a> и <a class="text-link" href="https://www.pexels.com/video/luxury-private-jet-on-tarmac-at-dusk-34746862/" ${external}>Joerg Mangelsen</a>. Использую их по <a class="text-link" href="https://www.pexels.com/license/" ${external}>лицензии Pexels</a>.</p><p><a class="text-link" href="https://valorin777.github.io/sochi/istochniki/" ${external}>Хроносфера: источники и авторство</a> — обложка командного учебного проекта.</p><p>В каждом кейсе я указываю формат работы, статус и доступные демонстрации. Снимки сделаны в ноябре 2026 года; проекты могут меняться.</p></div></section><section class="case-section"><h2>Шрифт</h2><div class="case-prose"><p>Manrope распространяется по SIL Open Font License. Файлы размещены вместе с сайтом.</p><a class="text-link" href="assets/Manrope-OFL.txt">Лицензия Manrope</a></div></section><section class="case-section"><h2>Приватность<br>и движение</h2><div class="case-prose"><p>Сайт не использует аналитику и формы сбора данных. Для связи указан мой Telegram. Шрифты и медиа хранятся вместе с сайтом.</p><p>Кнопка «Остановить анимацию» останавливает движение изображений и видео в избранных работах. Системная настройка уменьшения движения учитывается автоматически. Все кейсы доступны из каталога независимо от анимации.</p></div></section></div></main>${footer()}</body></html>`;
+const credits=`${head('Материалы и авторство','Источники, лицензии и авторство материалов личного портфолио.')}<body id="top">${header()}<main class="page-main" id="main-content" tabindex="-1"><section class="catalog-hero section"><p class="eyebrow">МАТЕРИАЛЫ И АВТОРСТВО</p><h1>За кадром.</h1></section><div class="credits-content section"><section class="case-section"><h2>Оформление</h2><div class="case-prose"><p>В своём портфолио я использую выразительную типографику и сценарий прокрутки. На главной есть кадры и обложки проектов, а также отдельно подписанные схемы, созданные для ленты.</p><p>В каталоге часть обложек — графические иллюстрации идеи приложения. Они подписаны отдельно и не выдаются за снимки интерфейса.</p></div></section><section class="case-section"><h2>Материалы проектов</h2><div class="case-prose"><p>Для обложки LAST WIND я использовал снимок сайта, а для сцены — фон и AI-персонажа из проекта. «Окошко» — официальная графическая обложка сервиса. XcelMini — снимок опубликованного Excel-тренера.</p><p>Для RusJet я использовал авиационные кадры авторов <a class="text-link" href="https://www.pexels.com/video/airplane-preparing-for-take-off-1650628/" ${external}>Jake Heinemann</a> и <a class="text-link" href="https://www.pexels.com/video/luxury-private-jet-on-tarmac-at-dusk-34746862/" ${external}>Joerg Mangelsen</a>. Использую их по <a class="text-link" href="https://www.pexels.com/license/" ${external}>лицензии Pexels</a>.</p><p><a class="text-link" href="https://valorin777.github.io/sochi/istochniki/" ${external}>Хроносфера: источники и авторство</a> — обложка командного учебного проекта.</p><p>В каждом кейсе я указываю формат работы, статус и доступные демонстрации. Снимки сделаны в ноябре 2026 года; проекты могут меняться.</p></div></section><section class="case-section"><h2>Шрифт</h2><div class="case-prose"><p>Manrope распространяется по SIL Open Font License. Файлы размещены вместе с сайтом.</p><a class="text-link" href="assets/Manrope-OFL.txt">Лицензия Manrope</a></div></section><section class="case-section"><h2>Приватность<br>и движение</h2><div class="case-prose"><p>Сайт не использует аналитику и формы сбора данных. Для связи указан мой Telegram. Шрифты и медиа хранятся вместе с сайтом.</p><p>Кнопка «Остановить движение» останавливает движение в витрине и ленте работ. Системная настройка уменьшения движения учитывается автоматически. Все кейсы доступны из каталога независимо от анимации.</p></div></section></div></main>${footer()}</body></html>`;
 for(const [name,html] of Object.entries({index:home,about,credits}))writeFileSync(`dist/${name}.html`,html+'\n');
 console.log(`Generated home, about, credits for ${data.length} projects.`);
 
