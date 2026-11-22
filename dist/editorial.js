@@ -9,7 +9,7 @@
   const controls = theater.querySelector('[data-theater-controls]');
   const counter = theater.querySelector('[data-theater-counter]');
   const status = theater.querySelector('[data-theater-status]');
-  const stop = theater.querySelector('#motion');
+  const stop = document.getElementById('motion');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 750px)');
   const count = panels.length;

@@ -1,0 +1,53 @@
+/* Original satin-metal montage prism. Its parent owns perspective and motion. */
+.signature-card{
+  --sig-depth:4.5px;
+  --sig-rim:10px;
+  --sig-corner:polygon(var(--sig-rim) 0,calc(100% - var(--sig-rim)) 0,100% var(--sig-rim),100% calc(100% - var(--sig-rim)),calc(100% - var(--sig-rim)) 100%,var(--sig-rim) 100%,0 calc(100% - var(--sig-rim)),0 var(--sig-rim));
+}
+.signature-card :where(.sig-face,.sig-edge){position:absolute;pointer-events:none}
+.signature-card .sig-face{inset:0;color:#eee7fa;box-sizing:border-box;backface-visibility:hidden}
+.signature-card .sig-face-front{transform:translateZ(var(--sig-depth))}
+.signature-card .sig-face-back{transform:rotateY(180deg) translateZ(var(--sig-depth))}
+.signature-card .sig-face-surface{position:absolute;inset:0;clip-path:var(--sig-corner);background:linear-gradient(136deg,#c6affc 0%,#615282 20%,#332847 56%,#9f7bf0 84%,#dcab92 100%);}
+.signature-card .sig-face-surface::before,.signature-card .sig-face-surface::after{content:"";position:absolute;clip-path:var(--sig-corner)}
+.signature-card .sig-face-surface::before{inset:1px;background:
+  radial-gradient(ellipse at 20% 12%,#514169 0,transparent 52%),
+  radial-gradient(ellipse at 78% 108%,#4d3049 0,transparent 47%),
+  repeating-linear-gradient(116deg,#cab9ff11 0,#cab9ff03 1px,transparent 2px,transparent 5px),
+  linear-gradient(146deg,#302a43,#1b1729 67%,#35253f); }
+.signature-card .sig-face-surface::after{inset:6px;border:1px solid #bfa7f842;box-shadow:inset 0 0 0 2px #21182a93;--sig-rim:7px;}
+.signature-card .sig-face-back .sig-face-surface::before{background:radial-gradient(ellipse at 26% 7%,#534267,transparent 58%),repeating-linear-gradient(122deg,#c4a3f911 0 1px,transparent 1px 4px),linear-gradient(153deg,#2c253d,#21182b 80%,#493344);}
+.signature-card .sig-socket{position:absolute;left:50%;top:22px;width:12px;height:12px;box-sizing:border-box;border-radius:50%;transform:translate(-50%,-50%);background:#16111f;border:1px solid #d3bdff;box-shadow:0 0 0 3px #252034,0 3px 8px #100c16,inset 0 1px 2px #be9aeb80;}
+.signature-card .sig-micro{position:absolute;margin:0;color:#d7c6ed;font:800 clamp(6px,.72vw,9px)/1.2 ui-monospace,monospace;letter-spacing:.115em}
+.signature-card .sig-series{top:18.6%;left:10%;right:10%;display:flex;justify-content:space-between;border-bottom:1px solid #bca9eb4d;padding-bottom:3.5%}
+.signature-card .sig-engraving{position:absolute;left:5%;width:90%;height:51%;top:24%;filter:drop-shadow(0 4px 14px #b293fd42)}
+.signature-card .sig-word{position:absolute;top:73%;left:8%;width:84%;margin:0;text-align:center;line-height:1.1;font-size:clamp(14px,2.25vw,30px);font-weight:800;letter-spacing:.28em;color:#f8edf9;padding-left:.28em;box-sizing:border-box}
+.signature-card .sig-bands{position:absolute;left:10%;right:10%;bottom:9.5%;display:grid;grid-template-columns:1fr 1.45fr 1.25fr;gap:5%;font:800 clamp(5.5px,.72vw,9px)/1 ui-monospace,monospace;letter-spacing:.075em;color:#f5eafa}
+.signature-card .sig-bands span{padding-top:13%;border-top:3px solid #a692fe}
+.signature-card .sig-bands span:nth-child(2){border-color:#d4bafb}
+.signature-card .sig-bands span:nth-child(3){border-color:#e4a988}
+.signature-card .sig-proof-title{top:19%;left:11%;right:11%;text-align:center}
+.signature-card .sig-proofs{position:absolute;top:28%;bottom:17.5%;left:10%;right:10%;display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:6%}
+.signature-card .sig-proof{position:relative;overflow:hidden;border:1px solid #bba0ef5b;min-height:0;background:#1d1726}
+.signature-card .sig-proof img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 48%;opacity:.9}
+.signature-card .sig-proof:nth-child(2) img{object-position:center 55%}
+.signature-card .sig-proof:nth-child(3) img{object-position:center 19%}
+.signature-card .sig-proof span{position:absolute;left:0;bottom:0;padding:.35em .6em;color:#f4eafb;background:#21182ef2;border-right:1px solid #bca7ee67;font:800 clamp(5.8px,.75vw,9px)/1.1 ui-monospace,monospace;letter-spacing:.09em}
+.signature-card .sig-back-id{bottom:9%;left:10%;right:10%;display:flex;justify-content:space-between;border-top:1px solid #bca9eb63;padding-top:3%}
+.signature-card .sig-edge{box-sizing:border-box;background:linear-gradient(90deg,#302348,#8f73b6 41%,#c3a7e4 49%,#745993 75%,#281d38);opacity:.99}
+.signature-card :is(.sig-edge-left,.sig-edge-right){top:var(--sig-rim);bottom:var(--sig-rim);width:calc(var(--sig-depth)*2)}
+.signature-card .sig-edge-left{left:calc(-1*var(--sig-depth));transform:rotateY(90deg)}
+.signature-card .sig-edge-right{right:calc(-1*var(--sig-depth));transform:rotateY(90deg)}
+.signature-card :is(.sig-edge-top,.sig-edge-bottom){left:var(--sig-rim);right:var(--sig-rim);height:calc(var(--sig-depth)*2);background:linear-gradient(0deg,#382b4d,#a78cca 51%,#705682);}
+.signature-card .sig-edge-top{top:calc(-1*var(--sig-depth));transform:rotateX(90deg)}
+.signature-card .sig-edge-bottom{bottom:calc(-1*var(--sig-depth));transform:rotateX(90deg)}
+.signature-card :is(.sig-edge-tl,.sig-edge-tr,.sig-edge-bl,.sig-edge-br){width:14.15px;height:calc(var(--sig-depth)*2);background:linear-gradient(0deg,#403056,#c5ace8 52%,#533963);}
+.signature-card .sig-edge-tl{left:5px;top:5px;transform:translate(-50%,-50%) rotate(-45deg) rotateX(90deg)}
+.signature-card .sig-edge-tr{right:5px;top:5px;transform:translate(50%,-50%) rotate(45deg) rotateX(90deg)}
+.signature-card .sig-edge-bl{left:5px;bottom:5px;transform:translate(-50%,50%) rotate(45deg) rotateX(90deg)}
+.signature-card .sig-edge-br{right:5px;bottom:5px;transform:translate(50%,50%) rotate(-45deg) rotateX(90deg)}
+@media(max-width:560px){
+ .signature-card{--sig-depth:3.5px}
+ .signature-card .sig-engraving{top:25%;height:48%}
+ .signature-card .sig-socket{width:10px;height:10px}
+}

@@ -20,17 +20,33 @@
     'focus-plus':    [-.13,  .17, .58,  34, -29,  -7,  .09,  .13, -.10],
     'b2-sprint':     [ .29, -.14, .60, -39,  31,  10, -.09, -.16,  .07],
   };
+  // Long establishing shots, fast cuts and quieter reveals are authored in
+  // viewport space. They all have a settled reading interval before exit.
+  const shots = {
+    establish: { start:1.09, span:.68, mobile:.53, exit:.23, lift:.22, pace:1.48, arc:1, delay:.06, exitDir:1 },
+    swing:     { start:1.06, span:.55, mobile:.48, exit:.20, lift:.24, pace:1.24, arc:.75, delay:.05, exitDir:-1 },
+    dissolve:  { start:1.03, span:.45, mobile:.39, exit:.14, lift:.12, pace:1.64, arc:.30, delay:.025, exitDir:1 },
+    cut:       { start:1.02, span:.32, mobile:.29, exit:.10, lift:.10, pace:1.40, arc:.44, delay:0, exitDir:-1 },
+  };
+  const shotFor = {
+    'last-wind':'establish', rusjet:'establish', okoshko:'establish',
+    'hse-coffee':'dissolve', faithoverfear:'swing', latelier:'swing',
+    'freelance-bot':'cut', lektoriy:'dissolve', xcelmini:'cut',
+    'glavny-geroy':'swing', orbit:'establish', sochi:'dissolve',
+    'vlados-quiz':'cut', 'focus-plus':'cut', 'b2-sprint':'dissolve',
+  };
   const depth = {
-    main:   { x:0, y:0, gain:1, z:0, bank:0 },
-    near:   { x:1, y:1, gain:.82, z:.17, bank:-.32 },
-    far:    { x:-.53, y:-.52, gain:.52, z:-.12, bank:.20 },
-    detail: { x:-.55, y:1.37, gain:1.15, z:.07, bank:.24 },
+    main:   { x:0, y:0, gain:1, z:0, bank:0, phase:0 },
+    near:   { x:1, y:1, gain:.82, z:.17, bank:-.32, phase:.80 },
+    far:    { x:-.53, y:-.52, gain:.52, z:-.12, bank:.20, phase:-.70 },
+    detail: { x:-.55, y:1.37, gain:1.15, z:.07, bank:.24, phase:1 },
   };
   const beats = [...document.querySelectorAll('[data-flight]')].flatMap(beat => {
     const scene = beat.querySelector('[data-flight-scene]');
     const path = paths[beat.dataset.flight];
     if (!scene || !path) return [];
-    return [{ scene, path, layers:[...new Set([...scene.querySelectorAll('[data-flight-layer]')]
+    const shot = shots[shotFor[beat.dataset.flight]] || shots.dissolve;
+    return [{ scene, path, shot, layers:[...new Set([...scene.querySelectorAll('[data-flight-layer]')]
       .map(layer => layer.dataset.flightLayer))] }];
   });
   if (!beats.length) return;
@@ -39,6 +55,7 @@
   const compact = matchMedia('(max-width: 600px)');
   const visible = new Set();
   const clamp = value => Math.max(0, Math.min(1, value));
+  const smooth = value => value * value * (3 - 2 * value);
   let frame = 0, enabled = false;
 
   function projectPlane(matrix) {
@@ -51,17 +68,15 @@
       .map(value => Number(value.toFixed(7))).join(',') + ')';
   }
 
-  function pose({scene, path, layers}, box, viewport, mobile) {
-    const start = viewport * .98;
-    const span = Math.min(viewport * (mobile ? .43 : .51), box.height + (mobile ? 70 : 140));
-    const entry = clamp((start - box.top) / span);
-    const leaving = .19 * clamp((viewport * .16 - box.bottom) / (viewport * .18));
+  function pose({scene, path, shot, layers}, box, viewport, mobile) {
+    const span = Math.min(viewport * (mobile ? shot.mobile : shot.span),
+      box.height + (mobile ? 88 : 185));
+    const entry = clamp((viewport * shot.start - box.top) / span);
+    const leaving = shot.lift * smooth(clamp((viewport * shot.exit - box.bottom) / (viewport * .24)));
     if (entry === 1 && leaving === 0) {
       scene.removeAttribute('data-flight-moving');
       return;
     }
-    const remaining = (1 - entry) ** 1.16;
-    const arc = Math.sin(Math.PI * entry) ** 2;
     const [x,y,z,yaw,pitch,bank,bend,nx,ny] = path;
     const softness = mobile ? .70 : 1;
     const distance = Math.min(box.width * z, mobile ? 325 : 690);
@@ -70,14 +85,24 @@
     for (const key of layers) {
       const config = depth[key];
       if (!config) continue;
+      // Phase offsets ping-pong across depths but are exactly zero at both
+      // endpoints: no jump to the static composition on fast/reverse scrolling.
+      const wave = 4 * entry * (1 - entry);
+      const time = clamp(entry - config.phase * shot.delay * wave);
+      const remaining = (1 - time) ** shot.pace;
+      const arc = shot.arc * Math.sin(Math.PI * time) ** 2;
       const delta = remaining + arc * .45;
-      const px = box.width * softness * (x * remaining * config.gain + bend * arc + nx * config.x * delta - x * leaving);
-      const py = box.height * (y * remaining * config.gain + ny * config.y * delta - .05 * arc - .29 * leaving);
-      const pz = -distance * remaining + Math.min(box.width, 730) * config.z * delta + arc * (mobile ? 15 : 40) - leaving * 45;
+      const direction = shot.exitDir + config.x * .35;
+      const px = box.width * softness * (x * remaining * config.gain + bend * arc
+        + nx * config.x * delta - x * leaving * direction);
+      const py = box.height * (y * remaining * config.gain + ny * config.y * delta
+        - .05 * arc - (.29 + config.z) * leaving);
+      const pz = -distance * remaining + Math.min(box.width, 730) * config.z * delta
+        + arc * (mobile ? 15 : 40) - leaving * 45;
       const camera = new DOMMatrix();
       camera.m34 = -1 / lens;
       camera.translateSelf(px, py, pz)
-        .rotateAxisAngleSelf(0, 1, 0, yaw * (remaining * config.gain - leaving * .56) * softness)
+        .rotateAxisAngleSelf(0, 1, 0, yaw * (remaining * config.gain - leaving * .56 * direction) * softness)
         .rotateAxisAngleSelf(1, 0, 0, pitch * (remaining + leaving * .31) * softness)
         .rotateAxisAngleSelf(0, 0, 1, bank * (remaining * (1 + config.bank) - arc * .14) * softness);
       scene.style.setProperty('--flight-' + key, projectPlane(camera));

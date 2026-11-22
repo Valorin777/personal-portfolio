@@ -1,0 +1,166 @@
+/* The signature sculpture has a separate interaction and never moves the heading. */
+.signature {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(1rem, 2.9vw, 3.3rem);
+  min-width: 0;
+}
+.signature .opening-heading {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 2.3vw, 2.2rem);
+  margin: 0;
+  min-width: 0;
+  z-index: 2;
+}
+.signature-eyebrow {
+  color: #c4b2ea;
+  margin: 0 0 clamp(.8rem, 2vw, 1.9rem);
+  font-size: .86rem;
+  font-weight: 750;
+  letter-spacing: .08em;
+}
+.signature .opening-heading h1 {
+  font-size: clamp(3.05rem, 7.5vw, 8.45rem);
+  letter-spacing: -.086em;
+  line-height: .94;
+  overflow-wrap: normal;
+}
+.signature h1 span { display: block; color: #d7c9f8; }
+.signature .opening-role {
+  margin-top: 1.25rem;
+  gap: .28rem .9rem;
+}
+.signature .opening-summary p { max-width: 32ch; }
+.signature-visual { min-width: 0; }
+.signature-stage {
+  --sig-card-w: clamp(215px, 21.5vw, 286px);
+  position: relative;
+  height: clamp(555px, 60vh, 690px);
+  isolation: isolate;
+  overflow: clip;
+}
+.signature-stage::before {
+  content: "";
+  position: absolute;
+  inset: 2% 0 4%;
+  background:
+    radial-gradient(ellipse 42% 38% at 52% 56%, #4c3a6d58, transparent 89%),
+    radial-gradient(ellipse 52% 50% at 78% 58%, #532d3d33, transparent 75%);
+  pointer-events: none;
+}
+.signature-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 3%;
+  pointer-events: none;
+  background:
+    linear-gradient(0deg, transparent 49.87%, #d6b7ff20 49.92%, #d6b7ff20 50.08%, transparent 50.13%) center / 100% 34%,
+    linear-gradient(90deg, transparent 49.8%, #cfb8ef19 49.9%, #cfb8ef19 50.06%, transparent 50.2%) center / 20% 100%;
+  mask-image: radial-gradient(ellipse 70% 46% at 55% 55%, #000, transparent 87%);
+}
+.signature-orbit {
+  position: absolute;
+  inset: 22% 6% 12%;
+  border: 1px solid #e1c9f81f;
+  border-radius: 50%;
+  transform: rotate(-24deg);
+  pointer-events: none;
+}
+.signature-orbit::before, .signature-orbit::after {
+  content: ""; position: absolute; border-radius: 50%; border: 1px solid #e1c9f816;
+}
+.signature-orbit::before { inset: 9% 8%; }
+.signature-orbit::after { inset: -10% 14%; transform: rotate(29deg); }
+.signature-cord {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.signature-cord path { fill: none; vector-effect: non-scaling-stroke; }
+.signature-cord-shadow { stroke: #0b0a12; stroke-width: 14px; }
+.signature-cord-thread { stroke: #9d8eae; stroke-width: 8px; }
+.signature-cord-weave { stroke: #e6d9f4; stroke-opacity: .57; stroke-width: 2px; stroke-dasharray: 1.1 4.6; }
+.signature-card {
+  position: absolute;
+  z-index: 3;
+  width: var(--sig-card-w);
+  aspect-ratio: 0.755;
+  left: var(--sig-x, 50%);
+  top: var(--sig-y, calc(29% - 22px));
+  transform: translate3d(-50%, 0, 0) perspective(940px) rotateZ(var(--sig-roll, -8deg)) rotateY(var(--sig-yaw, -14deg)) rotateX(var(--sig-pitch, 7deg));
+  transform-origin: 50% 22px;
+  transform-style: preserve-3d;
+}
+.signature-grab {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%; height: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 0;
+  background: transparent;
+  cursor: grab;
+  transform: translateZ(16px);
+  touch-action: pan-y pinch-zoom;
+  -webkit-tap-highlight-color: transparent;
+}
+[data-signature-grab] { user-select: none; }
+[data-signature-dragging] .signature-grab { cursor: grabbing; }
+.signature-marker {
+  position: absolute; right: 4%; bottom: 5%;
+  margin: 0; color: #b8aacd;
+  font: 700 .69rem/1.3 ui-monospace, monospace;
+  letter-spacing: .10em;
+  pointer-events: none;
+}
+.signature-controls {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: .3rem .9rem;
+  min-height: 3rem; color: var(--muted); font-size: .8rem;
+}
+.signature-controls .motion-control {
+  margin-left: auto; min-height: 44px; font-size: .8rem; color: #c6b6e4;
+}
+.signature-handoff {
+  position: relative;
+  margin-block: clamp(1.3rem, 4.6vh, 3.25rem) clamp(1.2rem, 2.1vw, 2.2rem);
+}
+.signature-handoff svg { width: 100%; height: clamp(1.3rem, 4vw, 3.15rem); display: block; overflow: visible; }
+.signature-handoff path { fill: none; stroke: #a38cc849; vector-effect: non-scaling-stroke; }
+.signature-handoff .signature-trace {
+  stroke: #d5b8ff;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--signature-iris, 0);
+  stroke-width: 1.35px;
+}
+.signature-index { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem 1.2rem; }
+.signature-index h2 { margin: .08rem 0 0; font-size: clamp(1.4rem, 3.3vw, 2.9rem); font-weight: 650; letter-spacing: -.04em; }
+.signature-index a { font-size: .88rem; }
+@media (min-width: 751px) and (max-width: 1000px) {
+  .signature-stage { --sig-card-w: clamp(176px, 24vw, 242px); }
+  .signature .opening-heading h1 { font-size: 7.2vw; }
+}
+@media (max-width: 750px) {
+  .signature { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .signature .opening-heading { gap: .9rem; }
+  .signature-eyebrow { font-size: .72rem; margin-bottom: .65rem; }
+  .signature .opening-heading h1 { font-size: clamp(2.5rem, 10.4vw, 4.7rem); }
+  .signature h1 span { display: inline; }
+  .signature .opening-role { margin-top: .55rem; }
+  .signature .opening-summary p { margin-bottom: .25rem; }
+  .signature-stage { --sig-card-w: clamp(154px, 42vw, 228px); height: clamp(310px, 89vw, 432px); }
+  .signature-marker { bottom: 3.5%; right: 4%; font-size: .57rem; }
+}
+@media (max-width: 360px) {
+  .signature .opening-heading h1 { font-size: clamp(2.5rem, 10vw, 3.2rem); }
+  .signature h1 span { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signature-handoff .signature-trace { stroke-dashoffset: 0; }
+}
