@@ -62,6 +62,7 @@
 .theater-stage:focus-visible { outline-offset: -4px; }
 .project-theater[data-ready] .theater-stage { touch-action: pan-y pinch-zoom; cursor: grab; user-select: none; }
 .project-theater[data-dragging] .theater-stage { cursor: grabbing; }
+.project-theater[data-static] .theater-stage { cursor: default; touch-action: auto; }
 .theater-world {
   position: absolute;
   inset: 0;
@@ -82,6 +83,8 @@
   opacity: var(--pose-opacity, 1);
   backface-visibility: hidden;
 }
+.project-theater:not([data-ready]) .theater-frame:not([data-home-pose]),
+.project-theater[data-ready] .theater-frame:not([data-pose-visible]) { display: none; }
 .theater-frame[data-home-pose="left"] {
   --pose-stack: 1;
   --pose-x: -34vw;
@@ -109,6 +112,7 @@
   border-radius: 2px;
   background: #34394f;
   box-shadow: 0 1px 2px #070912ab, 2px 16px 56px #07081687;
+  container-type: inline-size;
 }
 .theater-surface::after {
   content: "";
@@ -120,6 +124,32 @@
   box-shadow: inset 0 0 0 1px #b8b9df4d;
 }
 .theater-surface img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.theater-surface img[data-fit="contain"] { object-fit: contain; background: #ede8e2; }
+.theater-surface img[data-theater-src]:not([src]) { visibility: hidden; }
+.theater-cover {
+  position: absolute;
+  display: grid;
+  align-content: space-between;
+  gap: .5rem;
+  inset: 0;
+  padding: 6.5%;
+  color: #f2edf9;
+  background:
+    radial-gradient(ellipse 84% 100% at 90% 90%, color-mix(in srgb, var(--cover-light) 45%, transparent), transparent 76%),
+    linear-gradient(153deg, #171827, var(--cover-base) 87%);
+}
+.theater-cover span {
+  color: color-mix(in srgb, #efeaf7 76%, var(--cover-light));
+  font-size: clamp(.7rem, 3.05cqw, 1.05rem);
+  font-weight: 700;
+}
+.theater-cover strong {
+  font-size: clamp(1.5rem, 9cqw, 5.6rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.04em;
+  overflow-wrap: anywhere;
+}
 .theater-frame[data-theater-frame="last-wind"] { --panel-width: 66%; --panel-height: 82%; }
 .theater-field { object-position: 46% 49%; }
 .theater-foreground {
@@ -171,6 +201,7 @@
   font-size: clamp(1.48rem, 2.6vw, 2.8rem);
   line-height: 1.1;
   letter-spacing: -.038em;
+  overflow-wrap: anywhere;
 }
 .theater-work { margin: 0; color: var(--muted); line-height: 1.5; font-size: .9375rem; }
 .theater-link { justify-self: start; min-block-size: 44px; display: inline-flex; align-items: center; }

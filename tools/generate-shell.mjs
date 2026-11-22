@@ -1,5 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {homeCases,resumeHome} from './resume-home.mjs';
+import {getTheaterCases} from './theater-cases.mjs';
 const data=JSON.parse(readFileSync('project-data.json','utf8'));
 const contact=JSON.parse(readFileSync('contact-data.json','utf8'));
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -23,7 +24,21 @@ const hseProof={
 };
 const jet=homeCases.find(({id})=>id==='rusjet');
 const okoshko=homeCases.find(({id})=>id==='okoshko');
-const home=`${head('Личное портфолио','Разрабатываю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.','<link rel="stylesheet" href="editorial.css?v=7.0.1">')}<body class="home-page" id="top">${header()}
+const theaterCases=getTheaterCases(data,homeCases);
+const theaterFrame=({id,title,kind,art,accent,word},index)=>{
+  const homePose=index===0?'center':index===1?'right':index===theaterCases.length-1?'left':'';
+  const source=art?`${homePose?'src':'data-theater-src'}="${escapeHtml(art.src)}"`:'';
+  const cover=`<div class="theater-cover"><span>${escapeHtml(kind)}</span><strong>${escapeHtml(word||title)}</strong></div>`;
+  const surface=id==='last-wind'
+    ? `<img class="theater-field" src="assets/v5/last-wind-field.webp" alt="" width="1672" height="941" fetchpriority="high">`
+    : art ? `<img ${source} data-fit="${escapeHtml(art.fit)}" alt="" width="${art.width}" height="${art.height}" decoding="async">` : '';
+  const foreground=id==='last-wind'
+    ? `<div class="theater-foreground"><img class="theater-ronin" src="assets/v5/last-wind-ronin.webp" alt="" width="1024" height="1536" fetchpriority="high"></div>` : '';
+  return `<div class="theater-frame" data-theater-frame="${id}"${homePose?` data-home-pose="${homePose}"`:''} aria-hidden="true">
+    <div class="theater-surface" style="--cover-base:${escapeHtml(accent[0])};--cover-light:${escapeHtml(accent[1])}">${cover}${surface}</div>${foreground}
+  </div>`;
+};
+const home=`${head('Личное портфолио','Разрабатываю веб-сервисы, Telegram Mini Apps и сайты с интерактивной анимацией.','<link rel="stylesheet" href="editorial.css?v=7.1.0">')}<body class="home-page" id="top">${header()}
 <main id="main-content" tabindex="-1">
   <section class="opening section" aria-labelledby="hero-title">
     <div class="opening-heading">
@@ -41,29 +56,14 @@ const home=`${head('Личное портфолио','Разрабатываю �
     </div>
     <div class="project-theater" role="region" aria-label="Витрина проектов">
       <div class="theater-proscenium">
-        <div class="theater-stage" data-theater-stage aria-label="Кадры проектов" role="group">
+        <div class="theater-stage" data-theater-stage aria-label="Кадры проектов" role="group" aria-describedby="theater-instructions">
           <div class="theater-world">
-            <div class="theater-frame" data-theater-frame="last-wind" data-home-pose="center" aria-hidden="true">
-              <div class="theater-surface">
-                <img class="theater-field" src="assets/v5/last-wind-field.webp" alt="" width="1672" height="941" fetchpriority="high">
-              </div>
-              <div class="theater-foreground"><img class="theater-ronin" src="assets/v5/last-wind-ronin.webp" alt="" width="1024" height="1536" fetchpriority="high"></div>
-            </div>
-            <div class="theater-frame" data-theater-frame="rusjet" data-home-pose="right" aria-hidden="true">
-              <div class="theater-surface">
-                <img src="assets/v5/rusjet-dusk-poster.jpg" alt="" width="1600" height="900">
-              </div>
-            </div>
-            <div class="theater-frame" data-theater-frame="okoshko" data-home-pose="left" aria-hidden="true">
-              <div class="theater-surface">
-                <img src="assets/v5/okoshko-og.png" alt="" width="1200" height="630">
-              </div>
-            </div>
+            ${theaterCases.map(theaterFrame).join('')}
           </div>
         </div>
       </div>
       <div class="theater-caption">
-        <div class="theater-cases">${homeCases.map(({id,title,kind,work},index)=>`
+        <div class="theater-cases">${theaterCases.map(({id,title,kind,work},index)=>`
           <div class="theater-case" data-theater-case="${id}"${index ? ' hidden' : ''}>
             <div><p class="theater-kind">${escapeHtml(kind)}</p><h2 data-theater-title>${escapeHtml(title)}</h2></div>
             <p class="theater-work">${escapeHtml(work)}</p>
@@ -73,12 +73,13 @@ const home=`${head('Личное портфолио','Разрабатываю �
         <div class="theater-controls" data-theater-controls hidden>
           <div class="theater-steps" aria-label="Листать проекты" role="group">
             <button type="button" data-theater-step="-1">Назад</button>
-            <span class="theater-count" data-theater-counter aria-hidden="true">1 / ${homeCases.length}</span>
+            <span class="theater-count" data-theater-counter aria-hidden="true">01 / ${theaterCases.length}</span>
             <button type="button" data-theater-step="1">Далее</button>
           </div>
           <button type="button" id="motion" class="motion-control" aria-pressed="false" hidden>Остановить движение</button>
         </div>
       </div>
+      <p class="visually-hidden" id="theater-instructions">Выберите проект кнопками «Назад» и «Далее» или клавишами влево и вправо.</p>
       <p class="visually-hidden" data-theater-status aria-live="polite" aria-atomic="true"></p>
     </div>
   </section>
@@ -110,7 +111,7 @@ ${resumeHome}
     ${contactActions()}
     <span class="contact-handle">@${escapeHtml(contact.telegramUsername)}</span>
   </section>
-</main>${footer()}<script src="editorial.js?v=7.0.1" defer></script></body></html>`;
+</main>${footer()}<script src="editorial.js?v=7.1.0" defer></script></body></html>`;
 const about=`${head('Обо мне','Я учусь на бизнес-информатике в НИУ ВШЭ и разрабатываю сайты и приложения. Мой стек, подход и роли в проектах.')}<body class="about-page" id="top">${header('about')}<main class="page-main" id="main-content" tabindex="-1">
 <section class="about-hero section" aria-labelledby="about-title"><p class="eyebrow">ДИЗАЙН И РАЗРАБОТКА / VALORIN</p><h1 id="about-title">Валерий <em>Чарыгин</em></h1><div class="about-hero-bottom"><span class="oversized-monogram" aria-hidden="true">ВЧ</span><div><p class="large-copy">Разрабатываю сайты,<br>мобильные приложения<br>и Telegram-ботов.</p><p>Учусь на бизнес-информатике в НИУ ВШЭ и занимаюсь веб- и мобильной разработкой. В моих проектах есть сервис записи, Telegram-приложения, учебные инструменты и интерактивные веб-сцены.</p><p>«Окошко» — мой сервис записи к специалистам, а «Лекторий» — совместный проект для работы с лекциями. В отдельных кейсах описаны задачи, технологии и текущий статус.</p></div></div><dl class="about-facts reveal" aria-label="Образование и профессиональные направления"><div><dt>Образование</dt><dd>НИУ ВШЭ</dd></div><div><dt>Программа</dt><dd>Бизнес-информатика</dd></div><div><dt>Направления</dt><dd>Веб, мобильные приложения<br>и интерактивная графика</dd></div><div><dt>В работе</dt><dd>Дизайн, код<br>и AI-инструменты</dd></div></dl></section>
 <section class="about-fields section" aria-labelledby="fields-title"><div class="section-heading reveal"><p class="eyebrow">01 / ЧЕМ ЗАНИМАЮСЬ</p><h2 id="fields-title">Что я<br><em>делаю.</em></h2><p>Сервисы, учебные приложения<br>и интерактивные сайты.</p></div><div class="about-field-grid"><article class="reveal"><span class="role-label">ПРОДУКТЫ И СЕРВИСЫ</span><h3>Сервисы и приложения.</h3><p>«Окошко» помогает вести запись к специалистам, «Лекторий» собирает материалы лекций, L’atelier / Pocket Chef подбирает рецепты. Для этих задач разрабатываю интерфейсы и работу с данными.</p><div class="project-references"><a class="text-link" href="projects/okoshko.html">Окошко</a><a class="text-link" href="projects/lektoriy.html">Лекторий</a></div></article><article class="reveal"><span class="role-label">УЧЕБНЫЕ ПРИЛОЖЕНИЯ</span><h3>Практика и обучение.</h3><p>XcelMini помогает осваивать Excel через короткие уроки и сюжетный квест. B2 Sprint объединяет упражнения по английскому и повторение. Focus+ — учебный опрос об эффекте нулевой цены.</p><div class="project-references"><a class="text-link" href="projects/xcelmini.html">XcelMini</a><a class="text-link" href="projects/b2-sprint.html">B2 Sprint</a></div></article><article class="reveal"><span class="role-label">ИНТЕРАКТИВНЫЕ ИСТОРИИ</span><h3>Графика и анимация.</h3><p>В LAST WIND прокрутка управляет камерой, светом и сменой сцен. В ORBIT можно вращать и приближать вымышленные планеты. В этих проектах использую веб-графику и анимацию.</p><div class="project-references"><a class="text-link" href="projects/last-wind.html">LAST WIND</a><a class="text-link" href="projects/orbit.html">ORBIT</a></div></article></div></section>

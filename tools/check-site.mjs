@@ -27,6 +27,12 @@ for(const file of files){
  }
 }
 const data=JSON.parse(readFileSync('project-data.json','utf8'));const catalog=readFileSync(resolve(root,'work.html'),'utf8');
+const homepage=readFileSync(resolve(root,'index.html'),'utf8');
+const stageFrames=[...homepage.matchAll(/data-theater-frame="([^"]+)"/g)].map(match=>match[1]);
+const stageCases=[...homepage.matchAll(/data-theater-case="([^"]+)"[^>]*>[\s\S]*?data-theater-link href="projects\/([^"]+)\.html"/g)];
+const stageSlugs=new Set(stageFrames);
+if(stageFrames.length!==data.length||stageSlugs.size!==data.length||data.some(project=>!stageSlugs.has(project.slug)))errors.push('Homepage carousel must include every project once');
+if(stageCases.length!==stageFrames.length||stageCases.some((match,i)=>match[1]!==stageFrames[i]||match[2]!==stageFrames[i]))errors.push('Homepage carousel captions and case links must match the frame order');
 const cards=[...catalog.matchAll(/<article\b[^>]*class="catalog-card(?: reveal)?"[^>]*data-category="([^"]+)"/g)];
 if(cards.length!==data.length)errors.push(`Expected ${data.length} project cards; found ${cards.length}`);
 const previewCount=files.filter(file=>relative(root,file).startsWith('previews/')).length;
