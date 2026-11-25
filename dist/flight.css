@@ -190,3 +190,27 @@
 @media (prefers-reduced-motion: reduce) {
   [data-flight-moving] [data-flight-layer] { transform: none; }
 }
+
+.reel-zaabeel-cover {
+  inset: 9% 9% 8%;
+  overflow: hidden;
+  border-color: #b4d6eca1;
+}
+.reel-zaabeel-cover img {
+  object-fit: cover;
+  object-position: 50% 46%;
+}
+.reel-zaabeel-title {
+  position: absolute;
+  bottom: 12%;
+  left: 14%;
+  display: grid;
+  gap: .35rem;
+  padding: .85em 1.2em;
+  color: #edfaff;
+  background: #112b40ed;
+  border: 1px solid #ccdfef82;
+  box-shadow: 0 15px 35px #0e2834b0;
+}
+.reel-zaabeel-title span { font-size: clamp(10px, 1.6vw, 17px); }
+.reel-zaabeel-title b { font-size: clamp(16px, 3vw, 32px); line-height: 1; }

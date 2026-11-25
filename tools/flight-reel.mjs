@@ -1,4 +1,4 @@
-// Real project materials for the three existing scenes; the other scenes use
+// Real project materials for the photographic scenes; the other scenes use
 // project-specific compositions in the two art modules. No third-party runtime.
 import { productArt } from './reel-product-art.mjs';
 import { experimentArt } from './reel-experiment-art.mjs';
@@ -21,6 +21,12 @@ const originals = {
     art: `<div class="reel-film-frame reel-jet-dusk" data-flight-layer="main">${img('assets/v5/rusjet-dusk-poster.jpg', 1600, 904)}</div>
       <div class="reel-film-frame reel-jet-taxi" data-flight-layer="near">${img('assets/v5/rusjet-taxi-poster.jpg', 1600, 900)}</div>`,
   },
+  'one-zaabeel': {
+    caption: 'Провёл виртуальную камеру между башнями и под галереей The Link. В отдельной главе прокрутка управляет 4K-пролётом через иллюстративный интерьер.',
+    role: 'Независимый архитектурный концепт', label: 'The Link. Фото AbhijithPC1, CC BY-SA 4.0', layout: 'wide',
+    art: `<div class="reel-film-frame reel-zaabeel-cover" data-flight-layer="main">${img('assets/v5/one-zaabeel-link.jpg', 1920, 1278)}</div>
+      <div class="reel-zaabeel-title" data-flight-layer="near"><span>One Za’abeel</span><b>The Link</b></div>`,
+  },
   sochi: {
     caption: 'Вместе с командой сделал документальный маршрут по Сочи: в двенадцати главах можно сопоставить архивные фотографии и современные виды.',
     role: 'Командный учебный проект', label: 'Обложка проекта', layout: 'wide',
@@ -32,7 +38,7 @@ const originals = {
 const chapters = [
   { id:'reel-sites', title:'От фильма до продукта', note:'Интерактивный веб, собственный сервис и клиентская работа.', end:5 },
   { id:'reel-tools', title:'Инструменты и прототипы', note:'Мобильный интерфейс, автоматизация, обучение и игровая демоверсия.', end:10 },
-  { id:'reel-lab', title:'Сцены и эксперименты', note:'Веб-графика, командный сторителлинг и учебный эксперимент.', end:15 },
+  { id:'reel-lab', title:'Сцены и эксперименты', note:'Веб-графика, командный сторителлинг и учебный эксперимент.' },
 ];
 
 export function renderFlightReel(cases) {

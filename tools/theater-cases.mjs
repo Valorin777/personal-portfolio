@@ -1,6 +1,6 @@
 // Presentation data only. Claims and image metadata come from project-data.json;
 // the first three cases retain the reviewed copy in resume-home.mjs.
-const featuredOrder = ['last-wind', 'rusjet', 'okoshko', 'hse-coffee', 'faithoverfear'];
+const featuredOrder = ['okoshko', 'hse-coffee', 'one-zaabeel', 'last-wind', 'rusjet'];
 const featuredCopy = new Set(featuredOrder.slice(0, 3));
 
 // Each pair is a dark base and a quiet highlight for a typographic cover.
@@ -9,6 +9,7 @@ const palettes = {
   rusjet: ['#181c28', '#353143'],
   okoshko: ['#241c26', '#49303e'],
   'hse-coffee': ['#211b21', '#4b343c'],
+  'one-zaabeel': ['#152334', '#436887'],
   faithoverfear: ['#221d31', '#493350'],
   latelier: ['#241d1c', '#4c3731'],
   'freelance-bot': ['#181e2b', '#2d3851'],

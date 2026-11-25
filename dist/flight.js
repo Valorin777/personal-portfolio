@@ -7,6 +7,7 @@
     'last-wind':     [-.29, -.25, .78,  62,  13, -10,  .13,  .12, -.04],
     'rusjet':        [ .34, -.13, .81, -63, -13,  11, -.09, -.09,  .16],
     'okoshko':       [-.17,  .11, .68,  41,  27,  -6,  .11,  .10, -.10],
+    'one-zaabeel':   [-.34, -.16, .79,  58, -10,  -8,  .12,  .15,  .02],
     'hse-coffee':    [ .22,  .09, .55, -37,  21,   5, -.04, -.11,  .10],
     'faithoverfear': [-.20, -.11, .76,  51,  -9,  -7,  .05,  .13,  .06],
     'latelier':      [ .26, -.08, .63, -46,  16,  13, -.10, -.13,  .06],
@@ -30,7 +31,7 @@
   };
   const shotFor = {
     'last-wind':'establish', rusjet:'establish', okoshko:'establish',
-    'hse-coffee':'dissolve', faithoverfear:'swing', latelier:'swing',
+    'hse-coffee':'dissolve', 'one-zaabeel':'establish', faithoverfear:'swing', latelier:'swing',
     'freelance-bot':'cut', lektoriy:'dissolve', xcelmini:'cut',
     'glavny-geroy':'swing', orbit:'establish', sochi:'dissolve',
     'vlados-quiz':'cut', 'focus-plus':'cut', 'b2-sprint':'dissolve',

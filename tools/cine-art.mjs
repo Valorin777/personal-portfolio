@@ -15,9 +15,8 @@ export const cineArt = {
     layer('hse-paper','<small>СХЕМА · УЧЕБНАЯ ГРУППА</small><b>Расписание</b><div class="ca-hse-days">'+['ПН','ВТ','СР','ЧТ','ПТ'].map(d=>`<span>${d}</span>`).join('')+squares(15)+'</div>') +
     layer('hse-fold','<small>ПОДКЛЮЧЁННЫЕ ВЕДОМОСТИ</small><b>Оценки</b><div><span>Работы</span><i></i></div><div><span>Результат</span><i></i></div>') +
     layer('hse-tab','<i></i> ДЕДЛАЙНЫ'),
-  'last-wind':
-    layer('wind-field', img('last-wind-field.webp',1672,941)) +
-    layer('wind-air','<div></div><div></div>') +
-    layer('wind-ronin', img('last-wind-ronin.webp',1024,1536)) +
-    layer('wind-marks','<b>LAST<br>WIND</b><span>ВЕБ-СЦЕНА</span><i></i><i></i>'),
+  'one-zaabeel':
+    layer('zaabeel-image', img('one-zaabeel-link.jpg',1920,1278)) +
+    layer('zaabeel-grid','<i></i><i></i><i></i><i></i>') +
+    layer('zaabeel-title','<b>One Za’abeel</b><span>The Link / Дубай</span>'),
 };

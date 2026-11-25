@@ -7,6 +7,7 @@ const approvedPagesUrls = new Set([
   'https://valorin777.github.io/field-form/',
   'https://valorin777.github.io/focus-plus/study-v7/',
   'https://valorin777.github.io/glavny-geroy-play/#/play/couple',
+  'https://valorin777.github.io/one-zaabeel/',
   'https://valorin777.github.io/orbit/',
   'https://valorin777.github.io/rusjet-cinema-concept/',
   'https://valorin777.github.io/sochi/',
