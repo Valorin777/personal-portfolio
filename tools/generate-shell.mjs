@@ -33,7 +33,7 @@ const projectFor=id=>data.find(p=>p.slug===id);
 const cFor=id=>theaterCases.find(p=>p.id===id);
 const sequenceProjects=[
   {id:'okoshko',label:'Окошко',kind:'Собственный продукт',work:'Сделал сервис записи к частным специалистам. Клиент выбирает свободное время, мастер получает подтверждение в Telegram.',credit:'Обложка и схема записи'},
-  {id:'hse-coffee',label:'ХСЕ Кофе',kind:'Совместная разработка',work:'Вместе с однокурсником делаю Telegram Mini App: расписание подключённых групп, оценки из ведомостей и дедлайны.',credit:'Схема учебных экранов'},
+  {id:'hse-coffee',label:'HSE Coffee',kind:'Совместная разработка',work:'Вместе с однокурсником делаю Telegram Mini App: расписание подключённых групп, оценки из ведомостей и дедлайны.',credit:'Схема учебных экранов'},
   {id:'one-zaabeel',label:'One Za’abeel',kind:'Архитектурный концепт',work:'Собрал многостраничный сайт о резиденциях в Дубае. По прокрутке камера проходит под The Link, а в каталоге можно сравнить три схемы квартир.',credit:'The Link. Фото AbhijithPC1, CC BY-SA 4.0'}
 ];
 const cinemaBeat=({id,kind,work,credit},i)=>{

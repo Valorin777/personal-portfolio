@@ -32,7 +32,7 @@ export const homeCases = [
   },
   {
     id: 'hse-coffee',
-    title: 'ХСЕ Кофе',
+    title: 'HSE Coffee',
     kind: 'Совместная разработка',
     work: 'Вместе с однокурсником делаю Telegram Mini App с расписанием подключённых групп, оценками из ведомостей и дедлайнами.'
   },
